@@ -45,7 +45,7 @@ class DetailScreen extends StatelessWidget {
                                 textAlign: TextAlign.center)),
                       ),
                     ))))),
-        body: ListView(children: [
+        body: ListView(padding: EdgeInsets.all(0), children: [
           Stack(children: <Widget>[
             ListView.builder(
               padding: EdgeInsets.symmetric(vertical: 0),
@@ -512,8 +512,7 @@ class DetailScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          // you may want to use an aspect ratio here for tablet support
-          height: 500.0,
+          height: MediaQuery.of(context).size.height * 0.5,
           child: Stack(
             children: <Widget>[
               Hero(
@@ -527,7 +526,7 @@ class DetailScreen extends StatelessWidget {
                     },
                   )),
               Positioned(
-                top: 15.0,
+                top: 55.0,
                 left: 15.0,
                 child: CircleAvatar(
                   radius: 18,

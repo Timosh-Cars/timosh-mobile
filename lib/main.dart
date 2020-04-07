@@ -12,20 +12,17 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Тімош';
 
     return MaterialApp(
-      title: appTitle,
       theme: ThemeData(fontFamily: 'Raleway'),
-      home: MyHomePage(title: appTitle),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
+class HomePage extends StatelessWidget {
 
-  MyHomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key key}) : super(key: key);
 
   void _showModalBottomSheet(BuildContext context) {
     showModalBottomSheet<void>(
