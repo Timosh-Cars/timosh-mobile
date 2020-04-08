@@ -34,6 +34,8 @@ class CarsListState extends State<CarsList> {
     else if(difference < 2592000){dateago = "${(difference/604800).floor()} тиж. тому";}
     else if(difference < 31536000) {dateago = "${(difference/2592000).floor()} міс. тому";}
     else if(difference > 31536000) {dateago = "${(difference/31536000).floor()} рк. тому";}
+
+    return dateago;
   }
 
   _loadMoreCars() async {
