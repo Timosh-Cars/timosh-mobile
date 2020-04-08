@@ -11,9 +11,20 @@ class CarsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return ListView.builder(
       itemCount: cars.length,
       itemBuilder: (context, index) {
+          final difference = DateTime.now().difference(DateTime.parse(cars[index].dateCreated)).inSeconds;
+String dateago = 'зараз';
+  if(difference <= 0){dateago = 'зараз';}
+  else if(difference < 60){dateago = "${difference.toString()} сек. тому";}
+  else if(difference < 3600) {dateago = "${(difference/60).floor()} хв. тому";}
+  else if(difference < 86400){dateago = "${(difference/3600).floor()} год. тому";}
+  else if(difference < 604800){dateago = "${(difference/86400).floor()} дн. тому";}
+  else if(difference < 2592000){dateago = "${(difference/604800).floor()} тиж. тому";}
+  else if(difference < 31536000) {dateago = "${(difference/2592000).floor()} міс. тому";}
+  else if(difference > 31536000) {dateago = "${(difference/31536000).floor()} рк. тому";}
         return InkWell(
           onTap: () => Navigator.push(
             context,
@@ -197,7 +208,7 @@ class CarsList extends StatelessWidget {
                         Icons.location_on,
                         color: Colors.white,
                         size: 16.0,
-                        semanticLabel: 'Локация',
+                        semanticLabel: 'Локація',
                       ),
                     ),
                   ),
@@ -245,7 +256,7 @@ class CarsList extends StatelessWidget {
                         top: 6,
                       ),
                       child: Text(
-                        "some time ago",
+                        dateago,
                         style: TextStyle(
                             fontWeight: FontWeight.w400,
                             color: Colors.grey,
