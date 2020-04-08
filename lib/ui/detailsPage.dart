@@ -18,6 +18,19 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Car selectedCar = ModalRoute.of(context).settings.arguments;
 
+
+ final difference = DateTime.now().difference(DateTime.parse(selectedCar.dateCreated)).inSeconds;
+String dateago = 'зараз';
+  if(difference <= 0){dateago = 'зараз';}
+  else if(difference < 60){dateago = "${difference.toString()} сек. тому";}
+  else if(difference < 3600) {dateago = "${(difference/60).floor()} хв. тому";}
+  else if(difference < 86400){dateago = "${(difference/3600).floor()} год. тому";}
+  else if(difference < 604800){dateago = "${(difference/86400).floor()} дн. тому";}
+  else if(difference < 2592000){dateago = "${(difference/604800).floor()} тиж. тому";}
+  else if(difference < 31536000) {dateago = "${(difference/2592000).floor()} міс. тому";}
+  else if(difference > 31536000) {dateago = "${(difference/31536000).floor()} рк. тому";}
+
+
     // Use the Todo to create the UI.
     return Scaffold(
         backgroundColor: Color(0xaa13213e),
@@ -85,7 +98,7 @@ class DetailScreen extends StatelessWidget {
                     top: 6,
                   ),
                   child: Text(
-                    'some time ago',
+                     dateago,
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
@@ -117,7 +130,7 @@ class DetailScreen extends StatelessWidget {
                     top: 6,
                   ),
                   child: Text(
-                    selectedCar.metaData[0].value,
+                    "${selectedCar.metaData[0].value} переглядів",
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,

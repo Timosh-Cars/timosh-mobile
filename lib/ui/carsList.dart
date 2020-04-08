@@ -22,6 +22,20 @@ class CarsListState extends State<CarsList> {
   CarsProvider _carsProvider = CarsProvider();
   CarsListState({this.cars});
 
+  _convertTimeToString(String dateCreated) {
+    final difference = DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
+
+    String dateago = 'зараз';
+    if(difference <= 0){dateago = 'зараз';}
+    else if(difference < 60){dateago = "${difference.toString()} сек. тому";}
+    else if(difference < 3600) {dateago = "${(difference/60).floor()} хв. тому";}
+    else if(difference < 86400){dateago = "${(difference/3600).floor()} год. тому";}
+    else if(difference < 604800){dateago = "${(difference/86400).floor()} дн. тому";}
+    else if(difference < 2592000){dateago = "${(difference/604800).floor()} тиж. тому";}
+    else if(difference < 31536000) {dateago = "${(difference/2592000).floor()} міс. тому";}
+    else if(difference > 31536000) {dateago = "${(difference/31536000).floor()} рк. тому";}
+  }
+
   _loadMoreCars() async {
     setState(() => isLoading = true);
     _offset++;
@@ -274,7 +288,7 @@ class CarsListState extends State<CarsList> {
                               top: 6,
                             ),
                             child: Text(
-                              "some time ago",
+                              _convertTimeToString(cars[index].dateCreated),
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey,
