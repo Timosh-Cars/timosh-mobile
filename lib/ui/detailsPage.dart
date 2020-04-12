@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:timosh_app/models/car.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:money2/money2.dart';
 import 'dotsIndicator.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -19,22 +19,25 @@ class DetailScreen extends StatelessWidget {
     final Car selectedCar = ModalRoute.of(context).settings.arguments;
 
 
- final difference = DateTime.now().difference(DateTime.parse(selectedCar.dateCreated)).inSeconds;
-String dateago = 'зараз';
-  if(difference <= 0){dateago = 'зараз';}
-  else if(difference < 60){dateago = "${difference.toString()} сек. тому";}
-  else if(difference < 3600) {dateago = "${(difference/60).floor()} хв. тому";}
-  else if(difference < 86400){dateago = "${(difference/3600).floor()} год. тому";}
-  else if(difference < 604800){dateago = "${(difference/86400).floor()} дн. тому";}
-  else if(difference < 2592000){dateago = "${(difference/604800).floor()} тиж. тому";}
-  else if(difference < 31536000) {dateago = "${(difference/2592000).floor()} міс. тому";}
-  else if(difference > 31536000) {dateago = "${(difference/31536000).floor()} рк. тому";}
+  _convertTimeToString(String dateCreated) {
+    final difference = DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
+    if(difference <= 0){dateCreated = 'зараз';}
+    else if(difference < 60){dateCreated = "${difference} сек. тому";}
+    else if(difference < 3600) {dateCreated = "${(difference/60).floor()} хв. тому";}
+    else if(difference < 86400){dateCreated = "${(difference/3600).floor()} год. тому";}
+    else if(difference < 604800){dateCreated = "${(difference/86400).floor()} дн. тому";}
+    else if(difference < 2592000){dateCreated = "${(difference/604800).floor()} тиж. тому";}
+    else if(difference < 31536000) {dateCreated = "${(difference/2592000).floor()} міс. тому";}
+    else if(difference > 31536000) {dateCreated = "${(difference/31536000).floor()} рк. тому";}
+    return dateCreated;
+  }
+_removeAllHtmlTags(String htmlText) {RegExp exp = RegExp(r"<[^>]*>",multiLine: true,caseSensitive: true);return htmlText.replaceAll(exp, '');}
+_convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(currency), Currency.create('UAH', 0));return costPrice.format("###,###").replaceAll(',', ' ');}
 
-
-    // Use the Todo to create the UI.
     return Scaffold(
-        backgroundColor: Color(0xaa13213e),
-        bottomNavigationBar: Padding(
+        backgroundColor: Color(0xaa15202b),
+/*
+   bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(12.0),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
@@ -44,7 +47,7 @@ String dateago = 'зараз';
                     width: double.infinity,
                     child: Center(
                         child: new FlatButton(
-                      onPressed: () => launch("tel:+380933887874"),
+                      onPressed: () => launch("tel:${selectedCar.attributes[2].options[0]}"),
                       child: Container(
                         color: Color(0xff82cc00),
                         height: 50,
@@ -58,6 +61,22 @@ String dateago = 'зараз';
                                 textAlign: TextAlign.center)),
                       ),
                     ))))),
+*/
+                    floatingActionButton: Container(
+                    height: 55,
+                    margin: EdgeInsets.only(left:32.0, ),
+                    width: double.infinity,
+                    child: FloatingActionButton.extended(
+                      
+                      backgroundColor: Color(0xff82cc00),
+                      
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(13.0))),
+  onPressed: () {  launch("tel:${selectedCar.attributes[2].options[0]}");},
+  label: Text("Передзвонити",      style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                    fontSize: 20),),
+),),
         body: ListView(padding: EdgeInsets.all(0), children: [
           Stack(children: <Widget>[
             ListView.builder(
@@ -98,7 +117,7 @@ String dateago = 'зараз';
                     top: 6,
                   ),
                   child: Text(
-                     dateago,
+                     _convertTimeToString(selectedCar.dateCreated),
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
@@ -148,7 +167,7 @@ String dateago = 'зараз';
                 top: 20,
               ),
               child: Text(
-                "${selectedCar.price} грн",
+                "${_convertCurrency(selectedCar.price)} грн",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
@@ -234,7 +253,7 @@ String dateago = 'зараз';
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
-                      color: Color(0xff264562),
+                      color: Color(0xff183047),
                       child: Table(
 //          defaultColumnWidth:
 //              FixedColumnWidth(MediaQuery.of(context).size.width / 3),
@@ -286,7 +305,7 @@ String dateago = 'зараз';
                                     top: 18,
                                     right: 18,
                                   ),
-                                  child: Text(selectedCar.attributes[15].options[0],
+                                  child: Text(selectedCar.attributes[14].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -312,7 +331,7 @@ String dateago = 'зараз';
                                     top: 18,
                                     right: 18,
                                   ),
-                                  child: Text(selectedCar.attributes[0].options[0],
+                                  child: Text("${_convertCurrency(selectedCar.attributes[0].options[0])} км",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -490,16 +509,17 @@ String dateago = 'зараз';
                       )))),
           Padding(
               padding: const EdgeInsets.only(
-                  right: 12, left: 12, top: 12, bottom: 12),
+                  right: 12, left: 12, top: 12, bottom: 92),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
-                      color: Color(0xff264562),
+                      color: Color(0xff183047),
                       child: Padding(
                           padding: const EdgeInsets.only(
-                              right: 18, left: 18, top: 18, bottom: 18),
-                          child: Text(
-                              selectedCar.description,
+                              right: 18, left: 18, top: 18),
+                          child: Text( 
+                              _removeAllHtmlTags(selectedCar.description)
+                              ,
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
@@ -509,16 +529,15 @@ String dateago = 'зараз';
 
   Widget _buildCarousel(BuildContext context, int carouselIndex) {
     final Car selectedCar = ModalRoute.of(context).settings.arguments;
-    var arr = selectedCar.attributes[16].options[0].split(' ');
+    var arr = selectedCar.attributes[15].options[0].split(' ');
     final List<Widget> _pages = <Widget>[
       for (var i = 0; i < arr.length; i++)
-        new ConstrainedBox(
-            constraints: const BoxConstraints.expand(),
-            child: Image.network(
+       Image.network(
               arr[i],
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.cover,
               width: double.infinity,
-            )),
+              height: double.infinity
+            ),
     ];
 
     return Column(
@@ -539,7 +558,7 @@ String dateago = 'зараз';
                     },
                   )),
               Positioned(
-                top: 55.0,
+                top: 30.0,
                 left: 15.0,
                 child: CircleAvatar(
                   radius: 18,

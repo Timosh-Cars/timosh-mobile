@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:timosh_app/models/car.dart';
 import 'package:timosh_app/providers/carsProvider.dart';
-import 'package:transparent_image/transparent_image.dart';
-
+import 'package:money2/money2.dart';
 import 'detailsPage.dart';
 
 class CarsList extends StatefulWidget {
@@ -24,20 +23,20 @@ class CarsListState extends State<CarsList> {
 
   _convertTimeToString(String dateCreated) {
     final difference = DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
+    if(difference <= 0){dateCreated = 'зараз';}
+    else if(difference < 60){dateCreated = "${difference} сек. тому";}
+    else if(difference < 3600) {dateCreated = "${(difference/60).floor()} хв. тому";}
+    else if(difference < 86400){dateCreated = "${(difference/3600).floor()} год. тому";}
+    else if(difference < 604800){dateCreated = "${(difference/86400).floor()} дн. тому";}
+    else if(difference < 2592000){dateCreated = "${(difference/604800).floor()} тиж. тому";}
+    else if(difference < 31536000) {dateCreated = "${(difference/2592000).floor()} міс. тому";}
+    else if(difference > 31536000) {dateCreated = "${(difference/31536000).floor()} рк. тому";}
+    return dateCreated;}
 
-    String dateago = 'зараз';
-    if(difference <= 0){dateago = 'зараз';}
-    else if(difference < 60){dateago = "${difference.toString()} сек. тому";}
-    else if(difference < 3600) {dateago = "${(difference/60).floor()} хв. тому";}
-    else if(difference < 86400){dateago = "${(difference/3600).floor()} год. тому";}
-    else if(difference < 604800){dateago = "${(difference/86400).floor()} дн. тому";}
-    else if(difference < 2592000){dateago = "${(difference/604800).floor()} тиж. тому";}
-    else if(difference < 31536000) {dateago = "${(difference/2592000).floor()} міс. тому";}
-    else if(difference > 31536000) {dateago = "${(difference/31536000).floor()} рк. тому";}
-
-    return dateago;
-  }
-
+_convertCurrency(String currency) {
+  
+Money costPrice = Money.fromInt(int.parse(currency), Currency.create('UAH', 0));return costPrice.format("###,###").replaceAll(',', ' ');}
+  
   _loadMoreCars() async {
     setState(() => isLoading = true);
     _offset++;
@@ -52,6 +51,7 @@ class CarsListState extends State<CarsList> {
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
       LazyLoadScrollView(
+        
           onEndOfPage: () => _loadMoreCars(),
           scrollOffset: 100,
           child: ListView.builder(
@@ -67,6 +67,7 @@ class CarsListState extends State<CarsList> {
                     ),
                   ),
                 ),
+                
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -80,14 +81,14 @@ class CarsListState extends State<CarsList> {
                           borderRadius: BorderRadius.circular(12),
                           child: Hero(
                               tag: 'imageHero' + cars[index].id.toString(),
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
+                              child: FadeInImage.assetNetwork(
+                                placeholder: 'assets/450x450.jpg',
                                 image: cars[index]
-                                    .attributes[16]
+                                    .attributes[15]
                                     .options[0]
                                     .split(' ')[0],
-                                fit: BoxFit.fitWidth,
-                                height: 300,
+                              fit: BoxFit.cover,
+                                 height: MediaQuery.of(context).size.height * 0.375,
                                 width: double.infinity,
                               ))),
                     ),
@@ -122,7 +123,7 @@ class CarsListState extends State<CarsList> {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 5),
                                 child: Text(
-                                  "${cars[index].attributes[0].options[0]} км.",
+                                    "${_convertCurrency(cars[index].attributes[0].options[0])} км",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white,
@@ -242,7 +243,7 @@ class CarsListState extends State<CarsList> {
                               Icons.location_on,
                               color: Colors.white,
                               size: 16.0,
-                              semanticLabel: 'Локация',
+                              semanticLabel: 'Локація',
                             ),
                           ),
                         ),
@@ -275,11 +276,11 @@ class CarsListState extends State<CarsList> {
                                 top: 6,
                               ),
                               child: Text(
-                                "${cars[index].price} грн",
+                                "${_convertCurrency(cars[index].price)} грн",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white,
-                                    fontSize: 19),
+                                    fontSize: 20),
                               )),
                         ),
                         Align(
@@ -307,9 +308,7 @@ class CarsListState extends State<CarsList> {
           )),
       if (isLoading)
         Positioned(
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-          ),
+          child: CircularProgressIndicator(),
           bottom: 30,
           left: MediaQuery.of(context).size.width / 2 - 20,
         )

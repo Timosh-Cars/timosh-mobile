@@ -9,17 +9,19 @@ class BottomSheetContent extends StatelessWidget {
         children: [
           Container(
             height: 70,
-            child: Center(
-              child: Text(
+                 padding: EdgeInsets.all(12),
+            child:  Align(
+      alignment: Alignment.centerLeft,
+
+      child:  Text(
                 'Фільтр',
                 style: TextStyle(
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white,
-                    fontSize: 24),
+                    fontSize: 30),
               ),
             ),
           ),
-          Divider(thickness: 1),
           Expanded(
             child: ListView.builder(
               itemCount: 21,
