@@ -17,17 +17,20 @@ class CarsProvider {
     cars.addRange(await fetchCars());
   }
 
-  Future<List<Car>> fetchCars([int offset = 1]) async {
-    var path = "https://timosh.com.ua/wp-json/wc/v2/products?consumer_key=ck_b49d2c9b0a4c65b3d2d72e3db1aba704773f4f4d&consumer_secret=cs_b0e5d0b6dc84aa35c24ee30e8356abde75754da3&per_page=10&page=$offset";
+  Future<List<Car>> fetchCars(
+      [int offset = 1, String anc = "", String price = ""]) async {
+    var path =
+        "https://timosh.com.ua/wp-json/wc/v3/products?consumer_key=ck_b49d2c9b0a4c65b3d2d72e3db1aba704773f4f4d&consumer_secret=cs_b0e5d0b6dc84aa35c24ee30e8356abde75754da3&per_page=10&page=$offset&$anc&$price";
+
+    print(path);
 
     final response = await http.get(path);
 
-    if(response.statusCode != 200)
-      throw Exception("Cannot load cars");
+    if (response.statusCode != 200) throw Exception("Cannot load cars");
 
     var som = jsonDecode(response.body);
     var res = List<Car>();
-    for(final car in som) {
+    for (final car in som) {
       res.add(Car.fromJson(car));
     }
 

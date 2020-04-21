@@ -71,11 +71,11 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                       backgroundColor: Color(0xff82cc00),
                       
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(13.0))),
-  onPressed: () {  launch("tel:${selectedCar.attributes[2].options[0]}");},
+  onPressed: () {  launch("tel:${selectedCar.attributes[3].options[0]}");},
   label: Text("Передзвонити",      style: TextStyle(
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w300,
                                     color: Colors.white,
-                                    fontSize: 20),),
+                                    fontSize: 18),),
 ),),
         body: ListView(padding: EdgeInsets.all(0), children: [
           Stack(children: <Widget>[
@@ -196,7 +196,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                         semanticLabel: 'Звонок',
                       ),
                       onPressed: () {
-                        launch("tel:${selectedCar.attributes[2].options[0]}");
+                        launch("tel:${selectedCar.attributes[3].options[0]}");
                       },
                     ),
                   ),
@@ -231,7 +231,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                           top: 3,
                         ),
                         child: Text(
-                          selectedCar.attributes[2].options[0],
+                          selectedCar.attributes[3].options[0],
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.white,
@@ -281,7 +281,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                       top: 18,
                                       right: 18,
                                     ),
-                                    child: Text(selectedCar.attributes[3].options[0],
+                                    child: Text(selectedCar.attributes[0].options[0],
                                         style: TextStyle(
                                             fontWeight: FontWeight.w400,
                                             color: Colors.white,
@@ -331,7 +331,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                     top: 18,
                                     right: 18,
                                   ),
-                                  child: Text("${_convertCurrency(selectedCar.attributes[0].options[0])} км",
+                                  child: Text("${_convertCurrency(selectedCar.attributes[2].options[0])} км",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -544,7 +544,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.5,
+          height: MediaQuery.of(context).size.width * 1,
           child: Stack(
             children: <Widget>[
               Hero(
