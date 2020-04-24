@@ -19,8 +19,6 @@ class SliderWidget extends StatefulWidget {
 }
 
 class _SliderWidgetState extends State<SliderWidget> {
-
-
   @override
   Widget build(BuildContext context) {
     double paddingFactor = .2;
@@ -33,38 +31,44 @@ class _SliderWidgetState extends State<SliderWidget> {
       ),
       child: Stack(
         children: <Widget>[
-         Padding(
-              padding: EdgeInsets.only(top:50),
-              child:
-          ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child: Container(
-                  color: Color(0xff82cc00),
-                  width: 80,
-                  margin: const EdgeInsets.only(top: 0.0),
-                  height: 45))),
-                    Padding(
-              padding: EdgeInsets.only(top:50),
-              child:
-          Align(
-              alignment: Alignment.centerRight,
+          Padding(
+              padding: const EdgeInsets.only(
+                top: 20,
+              ),
+              child: Text(
+                'Ціна',
+                style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    fontSize: 16),
+              )),
+          Padding(
+              padding: EdgeInsets.only(top: 60),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: Container(
-                      color: Color(0xff183047),
+                      color: Color(0xff82cc00),
                       width: 80,
                       margin: const EdgeInsets.only(top: 0.0),
-                      height: 45)))),
-
-
-                
+                      height: 45))),
           Padding(
-              padding: EdgeInsets.only(right: 21.0, left: 21, top:50),
+              padding: EdgeInsets.only(top: 60),
+              child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Container(
+                          color: Color(0xff183047),
+                          width: 80,
+                          margin: const EdgeInsets.only(top: 0.0),
+                          height: 45)))),
+          Padding(
+              padding: EdgeInsets.only(right: 25.5, left: 25.5, top: 60),
               child: Center(
                 child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
                     activeTrackColor: Color(0xff82cc00),
-                    
+
                     inactiveTrackColor: Color(0xff183047),
 
                     trackHeight: 45.0,
@@ -86,37 +90,34 @@ class _SliderWidgetState extends State<SliderWidget> {
                     inactiveTickMarkColor: Colors.red.withOpacity(.7),
                   ),
                   child: Slider(
-                   min: 0,
-                      max: 5000000,
+                      min: 0,
+                      max: 250000,
                       value: rng,
                       onChangeStart: (value) {
-                          setState(() {
-                        libre = true;
-                        print(libre);
+                        setState(() {
+                          libre = true;
+                          print(libre);
                         });
                       },
-                       onChangeEnd: (value) {
-                         setState(() {
-                        libre = false;
-                        print(libre);
+                      onChangeEnd: (value) {
+                        setState(() {
+                          libre = false;
+                          print(libre);
                         });
                       },
                       onChanged: (value) {
-
-
-
                         setState(() {
-                            libre = true;
-                          
+                          libre = true;
+
                           rng = value;
                           toggleprice(value);
                         });
-                        
+
                         print(value);
                       }),
                 ),
               )),
-      
+
           /*Text(
               '${this.widget.max}',
               textAlign: TextAlign.center,
@@ -127,32 +128,32 @@ class _SliderWidgetState extends State<SliderWidget> {
               ),
             ),
             */
-            Visibility(
-  child: Positioned(
-               top:0,
-           width:80,
-              left:((MediaQuery.of(context).size.width-104)* (rng/5000000)),
-              
-              child: 
-                ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child:
-              Container(
-                width:70,
-                height:45,
-                color:rng > 0 ? Color(0xff82bb20) : Color(0xff27415b),
 
-
-                                child:
-              Center( child: 
-              Text(priceConvert(rng),   style: TextStyle(
+          Positioned(
+              top: 10,
+              width: 90,
+              left:
+                  ((MediaQuery.of(context).size.width - 112) * (rng / 250000)),
+              child: AnimatedOpacity(
+                  opacity: libre ? 1 : 0,
+                  duration: Duration(milliseconds: 50),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Container(
+                          width: 90,
+                          height: 45,
+                          color:
+                              rng > 0 ? Color(0xff82bb20) : Color(0xff27415b),
+                          child: Center(
+                              child: Text(
+                            rng > 0
+                                ? 'до ' + priceConvert(rng)
+                                : priceConvert(rng),
+                            style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white,
-                                fontSize: 13),))
-            ))),
-  visible: libre,
-),
-                 
+                                fontSize: 13),
+                          )))))),
         ],
       ),
     );

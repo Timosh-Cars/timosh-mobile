@@ -78,7 +78,12 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                     fontSize: 18),),
 ),),
         body: ListView(padding: EdgeInsets.all(0), children: [
+
+
           Stack(children: <Widget>[
+            
+
+
             ListView.builder(
               padding: EdgeInsets.symmetric(vertical: 0),
               itemCount: 1,
@@ -167,7 +172,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                 top: 20,
               ),
               child: Text(
-                "${_convertCurrency(selectedCar.price)} грн",
+                "${_convertCurrency(selectedCar.price)}" + r" $",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
@@ -601,6 +606,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
             ],
           ),
         ),
+        
       ],
     );
   }

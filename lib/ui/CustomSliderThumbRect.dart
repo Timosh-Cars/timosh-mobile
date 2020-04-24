@@ -38,7 +38,7 @@ class CustomSliderThumbRect extends SliderComponentShape {
 
     final rRect = RRect.fromRectAndRadius(
       Rect.fromCenter(
-          center: center, width: 80, height: 45),
+          center: center, width: 90, height: 45),
       Radius.circular(12),
     );
 

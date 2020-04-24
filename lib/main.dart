@@ -10,13 +10,16 @@ import 'ui/bottomSheetContent.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Raleway', accentColor:Colors.red),
+      theme: ThemeData(fontFamily: 'Raleway', accentColor: Colors.red, primarySwatch: Colors.red,
+             
+             
+             backgroundColor: Colors.red
+             ),
       home: SplashScreen(),
+   
       debugShowCheckedModeBanner: false,
     );
   }
@@ -31,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -39,20 +42,35 @@ class _SplashScreenState extends State<SplashScreen> {
           ));
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         backgroundColor: Color(0xaa15202b),
-      body: Center(
-        child:Container( width:MediaQuery.of(context).size.width*0.9, child:FlareActor("assets/hop.flr", alignment:Alignment.bottomCenter, fit:BoxFit.contain, animation:"Untitled")),
-    ));
+        backgroundColor: Color(0xaa15202b),
+        body: Stack(children: [
+          Center(
+              child: Text(
+            "Тімош",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Color(0xff183047),
+                fontSize: 34),
+          )),
+          Center(
+            child: Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: FlareActor("assets/hop.flr",
+                    alignment: Alignment.bottomCenter,
+                    fit: BoxFit.contain,
+                    animation: "Untitled")),
+          )
+        ]));
   }
 }
 
 class HomePage extends StatelessWidget {
-
   HomePage({Key key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,22 +81,17 @@ class HomePage extends StatelessWidget {
         future: CarsProvider().fetchCars(),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
-          
+
           return snapshot.hasData
               ? CarsList(cars: snapshot.data)
-              : Stack(children:[Positioned(top: MediaQuery.of(context).size.height / 2 - 20,left: MediaQuery.of(context).size.width / 2 - 20,child: Center(child: CircularProgressIndicator()))]);
+              : Stack(children: [
+                  Positioned(
+                      top: MediaQuery.of(context).size.height / 2 - 20,
+                      left: MediaQuery.of(context).size.width / 2 - 20,
+                      child: Center(child: CircularProgressIndicator()))
+                ]);
         },
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-

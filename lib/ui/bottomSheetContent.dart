@@ -108,7 +108,7 @@ class _BottomSheetContent extends State<FavoriteWidget> {
             ),
           ),
           Expanded(
-            child: ListView(padding: EdgeInsets.only(right: 10.0, bottom:20), children: [
+            child: ListView(padding: EdgeInsets.only(right: 10.0, bottom:25), children: [
               Wrap(direction: Axis.horizontal, children: [
                 Padding(
                     padding: const EdgeInsets.only(
@@ -390,14 +390,7 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                         widget.isSelected30),
                  
                   ])),
-
-                  Text(
-                          'Ціна',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16),
-                        ),
+   
               SliderWidget(),
             ]),
           ),

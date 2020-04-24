@@ -18,9 +18,9 @@ class CarsProvider {
   }
 
   Future<List<Car>> fetchCars(
-      [int offset = 1, String anc = "", String price = ""]) async {
+      [int offset = 1, String anc = "", String price = "", String categories = ""]) async {
     var path =
-        "https://timosh.com.ua/wp-json/wc/v3/products?consumer_key=ck_b49d2c9b0a4c65b3d2d72e3db1aba704773f4f4d&consumer_secret=cs_b0e5d0b6dc84aa35c24ee30e8356abde75754da3&per_page=10&page=$offset&$anc&$price";
+        "https://timosh.com.ua/wp-json/wc/v3/products?consumer_key=ck_b49d2c9b0a4c65b3d2d72e3db1aba704773f4f4d&consumer_secret=cs_b0e5d0b6dc84aa35c24ee30e8356abde75754da3&per_page=10&page=$offset&$anc&$price&$categories";
 
     print(path);
 
