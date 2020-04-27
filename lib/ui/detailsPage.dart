@@ -63,20 +63,23 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                     ))))),
 */
                     floatingActionButton: Container(
-                    height: 55,
-                    margin: EdgeInsets.only(left:32.0, ),
+                    height: 50,
+                  
+                    margin: EdgeInsets.only(left:12,right:12, bottom:12 ),
                     width: double.infinity,
                     child: FloatingActionButton.extended(
                       
                       backgroundColor: Color(0xff82cc00),
                       
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(13.0))),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
   onPressed: () {  launch("tel:${selectedCar.attributes[3].options[0]}");},
   label: Text("Передзвонити",      style: TextStyle(
-                                    fontWeight: FontWeight.w300,
+                                    fontWeight: FontWeight.w400,
                                     color: Colors.white,
-                                    fontSize: 18),),
+                                    fontSize: 16),),
 ),),
+
+ floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: ListView(padding: EdgeInsets.all(0), children: [
 
 
@@ -101,13 +104,13 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
           Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
-              padding: const EdgeInsets.only(left: 12, top: 12, right: 4),
+              padding: const EdgeInsets.only(left: 12, top: 12, right: 12),
               child: Text(
                 selectedCar.name,
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
-                    fontSize: 22),
+                    fontSize: 18),
               ),
             ),
           ),
@@ -126,7 +129,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
-                        fontSize: 16),
+                        fontSize: 13),
                   ),
                 ),
               ),
@@ -142,7 +145,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
-                        fontSize: 16),
+                        fontSize: 13),
                   ),
                 ),
               ),
@@ -158,7 +161,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
-                        fontSize: 16),
+                        fontSize: 13),
                   ),
                 ),
               ),
@@ -176,7 +179,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
-                    fontSize: 22),
+                    fontSize: 18),
               ),
             ),
           ),
@@ -191,13 +194,13 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                     top: 20,
                   ),
                   child: CircleAvatar(
-                    radius: 24,
+                    radius: 20,
                     backgroundColor: Color(0xff82cc00),
                     child: IconButton(
                       icon: new Icon(
                         Icons.local_phone,
                         color: Colors.white,
-                        size: 26.0,
+                        size: 22.0,
                         semanticLabel: 'Звонок',
                       ),
                       onPressed: () {
@@ -226,7 +229,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.white,
-                              fontSize: 17),
+                              fontSize: 14),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -240,7 +243,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.white,
-                              fontSize: 19),
+                              fontSize: 16),
                         ),
                       ),
                     ],
@@ -271,39 +274,39 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 18,
-                                      left: 18,
+                                      top: 16,
+                                      left: 16,
                                     ),
                                     child: Text('Локація',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 18,
-                                      right: 18,
+                                      top: 16,
+                                      right: 16,
                                     ),
                                     child: Text(selectedCar.attributes[0].options[0],
                                         style: TextStyle(
                                             fontWeight: FontWeight.w400,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                           ]),
                           TableRow(children: [
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 18,
+                                      left: 16,
                                       top: 18,
                                     ),
                                     child: Text("Кузов",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                               child: Padding(
                                   padding: const EdgeInsets.only(
@@ -314,7 +317,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                           ]),
                           TableRow(children: [
@@ -322,25 +325,25 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                     top: 18,
-                                    left: 18,
+                                    left: 16,
                                   ),
                                   child: Text('Пробіг',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                             TableCell(
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                     top: 18,
-                                    right: 18,
+                                    right: 16,
                                   ),
                                   child: Text("${_convertCurrency(selectedCar.attributes[2].options[0])} км",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                           ]),
                           TableRow(children: [
@@ -348,187 +351,187 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                 child: Padding(
                                     padding: const EdgeInsets.only(
                                       top: 18,
-                                      left: 18,
+                                      left: 16,
                                     ),
                                     child: Text('Топливо',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize:14)))),
                             TableCell(
                                 child: Padding(
                               padding: const EdgeInsets.only(
                                 top: 18,
-                                right: 18,
+                                right: 16,
                               ),
                               child: Text(selectedCar.attributes[4].options[0],
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white,
-                                      fontSize: 16)),
+                                      fontSize: 14)),
                             )),
                           ]),
                           TableRow(children: [
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 18,
+                                      left: 16,
                                       top: 18,
                                     ),
                                     child: Text("Об'єм двигуна",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                     top: 18,
-                                    right: 18,
+                                    right: 16,
                                   ),
                                   child: Text(selectedCar.attributes[5].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                           ]),
                           TableRow(children: [
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 18,
+                                      left: 16,
                                       top: 18,
                                     ),
                                     child: Text("Рік випуску",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                               child: Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 18, right: 18),
+                                      const EdgeInsets.only(top: 18, right: 16),
                                   child: Text(selectedCar.attributes[6].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                           ]),
                           TableRow(children: [
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 18,
+                                      left: 16,
                                       top: 18,
                                     ),
                                     child: Text("Коробка",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                               child: Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 18, right: 18),
+                                      const EdgeInsets.only(top: 18, right: 16),
                                   child: Text(selectedCar.attributes[7].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                           ]),
                           TableRow(children: [
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 18,
+                                      left: 16,
                                       top: 18,
                                     ),
                                     child: Text("Привід",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                     top: 18,
-                                    right: 18,
+                                    right: 16,
                                   ),
                                   child: Text(selectedCar.attributes[8].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                           ]),
                           TableRow(children: [
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 18,
+                                      left: 16,
                                       top: 18,
                                     ),
                                     child: Text("Колір",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                               child: Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 18, right: 18),
+                                      const EdgeInsets.only(top: 18, right: 16),
                                   child: Text(selectedCar.attributes[9].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize:14))),
                             ),
                           ]),
                           TableRow(children: [
                             TableCell(
                                 child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 18,
+                                      left: 16,
                                       top: 18,
                                     ),
                                     child: Text("Таможня",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 16)))),
+                                            fontSize: 14)))),
                             TableCell(
                               child: Padding(
                                   padding: const EdgeInsets.only(
-                                      top: 18, right: 18, bottom: 18),
+                                      top: 18, right: 16, bottom: 16),
                                   child: Text(selectedCar.attributes[10].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize: 16))),
+                                          fontSize: 14))),
                             ),
                           ])
                         ],
                       )))),
           Padding(
               padding: const EdgeInsets.only(
-                  right: 12, left: 12, top: 12, bottom: 92),
+                  right: 12, left: 12, top: 12, bottom: 78),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
                       color: Color(0xff183047),
                       child: Padding(
                           padding: const EdgeInsets.only(
-                              right: 18, left: 18, top: 18),
+                              right: 16, left: 16, top: 16),
                           child: Text( 
                               _removeAllHtmlTags(selectedCar.description)
                               ,
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16)))))),
+                                  fontSize: 14)))))),
         ]));
   }
 
@@ -539,6 +542,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
       for (var i = 0; i < arr.length; i++)
        Image.network(
               arr[i],
+              
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity
@@ -549,30 +553,28 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          height: MediaQuery.of(context).size.width * 1,
+          height: MediaQuery.of(context).size.width * 1.30,
           child: Stack(
             children: <Widget>[
-              Hero(
-                  tag: 'imageHero' + selectedCar.id.toString(),
-                  child: PageView.builder(
+               PageView.builder(
                     // store this controller in a State to save the carousel scroll position
                     controller: _controller,
                     itemCount: _pages.length,
                     itemBuilder: (BuildContext context, int itemIndex) {
                       return _pages[itemIndex % _pages.length];
                     },
-                  )),
+                  ),
               Positioned(
-                top: 30.0,
-                left: 15.0,
+                top: 42.0,
+                left: 12.0,
                 child: CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Colors.black.withOpacity(0.8),
+                  radius: 16,
+                  backgroundColor: Color(0xff183047).withOpacity(1),
                   child: IconButton(
                     icon: new Icon(
                       Icons.close,
                       color: Colors.white,
-                      size: 18,
+                      size: 16,
                       semanticLabel: 'Назад',
                     ),
                     onPressed: () {
@@ -585,11 +587,11 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                   alignment: FractionalOffset.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                      left: 10,
-                      right: 10,
+                      left: 12,
+                      right: 12,
                     ),
                     child: new Container(
-                      height: 15,
+                      height: 12,
                       child: DotsIndicator(
                         controller: _controller,
                         itemCount: _pages.length,

@@ -83,7 +83,7 @@ class _BottomSheetContent extends State<FavoriteWidget> {
               style: TextStyle(
                   fontWeight: FontWeight.w300,
                   color: Colors.white,
-                  fontSize: 16)),
+                  fontSize: 14)),
         ));
   }
 
@@ -94,7 +94,7 @@ class _BottomSheetContent extends State<FavoriteWidget> {
       child: Column(
         children: [
           Container(
-            height: 70,
+            height: 60,
             padding: EdgeInsets.all(12),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -103,16 +103,17 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
-                    fontSize: 30),
+                    fontSize: 24),
               ),
             ),
           ),
           Expanded(
-            child: ListView(padding: EdgeInsets.only(right: 10.0, bottom:25), children: [
+            child: ListView(padding: EdgeInsets.only(right: 6.0, bottom:25), children: [
               Wrap(direction: Axis.horizontal, children: [
                 Padding(
                     padding: const EdgeInsets.only(
                       left: 12,
+                   
                       top: 15,
                     ),
                     child: Text(
@@ -231,6 +232,7 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                     Padding(
                         padding: const EdgeInsets.only(
                           left: 12,
+                        
                           top: 15,
                         ),
                         child: Text(
@@ -263,6 +265,7 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                     Padding(
                         padding: const EdgeInsets.only(
                           left: 12,
+                          
                           top: 15,
                         ),
                         child: Text(
@@ -293,6 +296,7 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                     Padding(
                         padding: const EdgeInsets.only(
                           left: 12,
+                    
                           top: 15,
                         ),
                         child: Text(

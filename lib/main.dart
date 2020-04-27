@@ -12,11 +12,22 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Raleway', accentColor: Colors.red, primarySwatch: Colors.red,
+      
+      theme: ThemeData(fontFamily: 'Raleway', accentColor: Color(0xff183047),
+             backgroundColor: Color(0xff183047),
+
+    primaryColor: Color(0xff183047),
+
+    primaryColorBrightness: Brightness.dark,
+    brightness: Brightness.dark,
+
+
+primaryColorDark: Color(0xff183047),
+    scaffoldBackgroundColor: Color(0xff183047),
              
-             
-             backgroundColor: Colors.red
+        
              ),
       home: SplashScreen(),
    
@@ -59,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
           )),
           Center(
             child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.75,
                 child: FlareActor("assets/hop.flr",
                     alignment: Alignment.bottomCenter,
                     fit: BoxFit.contain,
@@ -78,10 +89,11 @@ class HomePage extends StatelessWidget {
       backgroundColor: Color(0xaa15202b),
       body: FutureBuilder<List<Car>>(
         //future: fetchPhotos(http.Client()),
+      
         future: CarsProvider().fetchCars(),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
-
+                  
           return snapshot.hasData
               ? CarsList(cars: snapshot.data)
               : Stack(children: [

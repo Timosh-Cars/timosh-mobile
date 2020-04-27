@@ -6,6 +6,7 @@ String ghh = "";
 String savesearch = "";
 var libre = false;
 var libre1 = false;
+bool showpage = false;
 var map = {"isSelected": false, "isSelected1": false, "isSelected2": false};
 var map1 = Map();
 abc() {

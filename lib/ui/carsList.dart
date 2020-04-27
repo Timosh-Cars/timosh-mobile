@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:timosh_app/DataList.dart';
 import 'package:timosh_app/Searchb.dart';
 import 'package:timosh_app/models/car.dart';
@@ -11,8 +9,6 @@ import 'package:money2/money2.dart';
 import 'package:timosh_app/ui/ModalInsideModal.dart';
 import 'bottomSheetContent.dart';
 import 'detailsPage.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class CarsList extends StatefulWidget {
   List<Car> cars;
@@ -93,12 +89,14 @@ class CarsListState extends State<CarsList> {
   loadMoreCars() async {
     setState(() => isLoading = true);
     _offset++;
-    var carsToAdd = await _carsProvider.fetchCars(_offset, cba, savevalue, categories);
+    var carsToAdd =
+        await _carsProvider.fetchCars(_offset, cba, savevalue, categories);
     setState(() {
       widget.cars.addAll(carsToAdd);
     });
     setState(() => isLoading = false);
   }
+
 /*
   refreshCars() async {
     setState(() => isLoading1 = true);
@@ -109,17 +107,27 @@ class CarsListState extends State<CarsList> {
     setState(() => isLoading1 = false);
   }
 */
+
+static AnimationController createAnimationController(TickerProvider vsync) {
+  return AnimationController(
+    duration: Duration(milliseconds:1000),
+    debugLabel: 'BottomSheet',
+    vsync: vsync,
+  );
+}
+
   closebottom(int a, String b, String pricing, String ctg) async {
     setState(() => isLoading1 = true);
     var carsToAdd = await _carsProvider.fetchCars(a, b, pricing, ctg);
     widget.cars.clear();
     widget.cars.addAll(carsToAdd);
+
     setState(() => isLoading1 = false);
   }
 
   displayBottomSheet() {
     run = cba + savevalue;
-print(run);
+    print(run);
     showModalBottomSheet<void>(
       context: context,
       isDismissible: true,
@@ -144,14 +152,12 @@ print(run);
 
   @override
   Widget build(BuildContext context) {
+      // print(widget.cars.length);
     return Scaffold(
-      backgroundColor: Color(0xaa15202b),
+      backgroundColor: Color(0xaa15202b).withOpacity(1),
       floatingActionButton: FlatButton(
         onPressed: () {
-showMaterialModalBottomSheet(
-  context: context,
-  elevation: 400,
-  builder: (context, scrollController) => ModalInsideModal(scrollController: scrollController));
+    
         },
         shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(12.0)),
@@ -181,44 +187,45 @@ showMaterialModalBottomSheet(
               padding: EdgeInsets.only(right: 12, left: 12, top: 12),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child:
-                  
-                     GestureDetector(
-        onTap: () {
-       showSearch(
-                          context: context,
-                          delegate: DataSearch(listWords)).whenComplete(() {
-                            print(savesearch);
-      print('Зкрыто search');
- closebottom(1, cba, savevalue, categories);
-    });
-        },
+                  child: GestureDetector(
+                      onTap: () {
+                        showSearch(
+                                context: context,
+                                delegate: DataSearch(listWords))
+                            .whenComplete(() {
+                          print(savesearch);
+                          print('Закрыто search');
+                          closebottom(1, cba, savevalue, categories);
+                        });
+                      },
                       child: Container(
-                          padding:
-                              EdgeInsets.only(left: 12,right:12),
-                          height: 55,
+                          padding: EdgeInsets.only(left: 6, right: 6),
+                          height: 50,
                           color: Color(0xff183047),
                           child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: 
-                            
-                            Row(children: <Widget>[
-                              Padding(padding:
-                              EdgeInsets.only(right:12), child:
-      Icon(
-                              Icons.search,
-                              color: Colors.white,
-                              size: 24.0,
-                              semanticLabel: 'Пошук',
-                            )),
-                            Text(savesearch.isEmpty ? 'Введіть текст' : savesearch,
-                                textAlign: TextAlign.left,
-                              style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: savesearch.isEmpty ? Colors.grey : Colors.white,
-                              fontSize: 16),
+                              alignment: Alignment.centerLeft,
+                              child: Row(children: <Widget>[
+                                Padding(
+                                    padding: EdgeInsets.only(right: 12, left:6),
+                                    child: Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                      size: 24.0,
+                                      semanticLabel: 'Пошук',
+                                    )),
+                                Text(
+                                  savesearch.isEmpty
+                                      ? 'Введіть марку або модель авто'
+                                      : savesearch,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      color: savesearch.isEmpty
+                                          ? Colors.grey
+                                          : Colors.white,
+                                      fontSize: 14),
                                 ),
-                            ])))
+                              ])))
                       /*
 TextField(
   
@@ -235,159 +242,44 @@ fillColor: Color(0xff183047), filled: true,
   ),
 )*/
                       ))),
-          Container(
-      height: 60,
-      child:
-          
-          ListView(
-              scrollDirection: Axis.horizontal,
-             physics: ScrollPhysics(),
-            shrinkWrap: true,
-              children: <Widget>[
-                Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: ChoiceChip(
-                      labelPadding: const EdgeInsets.only(
-                      left: 15,right:15,
-                    ),
-                      backgroundColor: Color(0xff183047),
-                      selected: false,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Color(0xff82cc00),
-                      disabledColor: Color(0xff183047),
-                      onSelected: (state) {displayBottomSheet();},
-                      label: Text("Фільтр",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16)),
-                    )),
 
-Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: ChoiceChip(
-                      labelPadding: const EdgeInsets.only(
-                      left: 20,right:20
-                    ),
-                      backgroundColor: Color(0xff183047),
-                      selected: false,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Color(0xff82cc00),
-                      disabledColor: Color(0xff183047),
-                      onSelected: (state) {showBarModalBottomSheet(
-                            expand: true,
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context, scrollController) =>
-                                ModalInsideModal(
-                                    scrollController: scrollController),
-                          );},
-                      label: Text("Фільтр",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16)),
-                    )),
+                      Align(
+                         alignment: Alignment.bottomLeft,
+                         child:
+        Padding(
+                        padding: const EdgeInsets.only(
+                          left: 12,
+                        ),
+                        child: ChoiceChip(
+                          labelPadding:
+                              const EdgeInsets.only(left: 20, right: 20),
+                          backgroundColor: Color(0xff183047).withOpacity(1),
+                          selected: false,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0)),
+                          ),
+                          selectedColor: Color(0xff82cc00).withOpacity(1),
+                          disabledColor: Color(0xff183047).withOpacity(1),
+                          onSelected: (state) {
+                            displayBottomSheet();
+                          },
+                          label: Text("Фільтр",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  fontSize: 14)),
+                        ))),
 
-                    Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: ChoiceChip(
-                      labelPadding: const EdgeInsets.only(
-                      left: 20,right:20
-                    ),
-                      backgroundColor: Color(0xff183047),
-                      selected: false,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Color(0xff82cc00),
-                      disabledColor: Color(0xff183047),
-                      onSelected: (state) {showCupertinoModalBottomSheet(
-                            expand: true,
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context, scrollController) =>
-                                ModalInsideModal(
-                                    scrollController: scrollController),
-                          );},
-                      label: Text("Фільтр",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16)),
-                    )),
-                    Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: ChoiceChip(
-                      labelPadding: const EdgeInsets.only(
-                      left: 20,right:20
-                    ),
-                      backgroundColor: Color(0xff183047),
-                      selected: false,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Color(0xff82cc00),
-                      disabledColor: Color(0xff183047),
-                      onSelected: (state) {showMaterialModalBottomSheet(
-                            expand: false,
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context, scrollController) =>
-                                ModalFit(scrollController: scrollController),
-                          );},
-                      label: Text("Фільтр",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16)),
-                    )),
-                    Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: ChoiceChip(
-                      labelPadding: const EdgeInsets.only(
-                      left: 20,right:20
-                    ),
-                      backgroundColor: Color(0xff183047),
-                      selected: false,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Color(0xff82cc00),
-                      disabledColor: Color(0xff183047),
-                      onSelected: (state) {},
-                      label: Text("Фільтр",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16)),
-                    ))
-
-
-
-              ])),
-
-
+                        
           ListView.builder(
             padding: EdgeInsets.only(bottom: 70),
             itemCount: widget.cars.length,
             physics: ScrollPhysics(),
             shrinkWrap: true,
+            
             itemBuilder: (context, index) {
+           
               return InkWell(
                 onTap: () =>
                     /* _refreshCars() */
@@ -403,65 +295,91 @@ Padding(
                 ),
                 child: Column(
                   children: <Widget>[
-                    Padding(
+ Padding(
                       padding: const EdgeInsets.only(
                         left: 12,
-                        top: 20,
+                        top:12,
+                        bottom:12,
                         right: 12,
                       ),
                       // handle your onTap here
-                      child: ClipRRect(
+                      child:
+                        ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Hero(
-                              tag: 'imageHero' +
-                                  widget.cars[index].id.toString(),
-                              child: FadeInImage.assetNetwork(
+                          child:
+                    Stack(
+  children: <Widget>[
+                   FadeInImage.assetNetwork(
                                 placeholder: 'assets/450x450.jpg',
                                 image: widget
                                     .cars[index].attributes[15].options[0]
                                     .split(' ')[0],
                                 fit: BoxFit.cover,
                                 height:
-                                    MediaQuery.of(context).size.width * 0.75,
+                                    MediaQuery.of(context).size.width * 1.3,
                                 width: double.infinity,
-                              ))),
-                    ),
-                    Align(
+                              ),
+          
+                    Container(
+    height:
+                                    MediaQuery.of(context).size.width * 1.3,
+                                width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+                Colors.transparent,
+           Color(0xC0000608),
+         
+          
+          ],
+        ),
+      )),
+
+       Positioned.fill(
+      child:
+
+                 Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(
                           left: 12,
-                          right: 6,
-                          top: 8,
+                          
+                          right: 12,
+                          bottom: 83,
                         ),
                         child: Text(
+                          
                           widget.cars[index].name,
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.white,
-                              fontSize: 19),
+                              fontSize: 16),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ),
-                    Row(
+                    )),
+ Positioned.fill(
+      child:
+                         Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
                               padding: const EdgeInsets.only(
-                                left: 6,
-                                top: 6,
+                                left: 12,
+                                bottom: 60,
                               ),
                               child: Padding(
-                                padding: EdgeInsets.only(left: 5),
+                                padding: EdgeInsets.only(left: 0),
                                 child: Text(
                                   "${_convertCurrency(widget.cars[index].attributes[2].options[0])} км",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white,
-                                      fontSize: 16),
+                                      fontSize: 14),
                                 ),
                               )),
                         ),
@@ -470,14 +388,14 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 6,
-                              top: 6,
+                               bottom: 60,
                             ),
                             child: Text(
                               '•',
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
@@ -486,14 +404,14 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 6,
-                              top: 6,
+                               bottom: 60,
                             ),
                             child: Text(
                               widget.cars[index].attributes[4].options[0],
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
@@ -502,14 +420,14 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 6,
-                              top: 6,
+                                bottom: 60,
                             ),
                             child: Text(
                               '•',
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
@@ -518,14 +436,14 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 6,
-                              top: 6,
+                                bottom: 60,
                             ),
                             child: Text(
                               widget.cars[index].attributes[5].options[0],
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
@@ -534,14 +452,14 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 6,
-                              top: 6,
+                            bottom: 60,
                             ),
                             child: Text(
                               '•',
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
@@ -550,19 +468,22 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 6,
-                              top: 6,
+                              bottom: 60,
                             ),
                             child: Text(
                               widget.cars[index].attributes[7].options[0],
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
                       ],
-                    ),
+                    )),
+
+                               Positioned.fill(
+      child:
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -571,12 +492,12 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 12,
-                              top: 6,
+                             bottom: 38,
                             ),
                             child: Icon(
                               Icons.location_on,
                               color: Colors.white,
-                              size: 16.0,
+                              size: 14.0,
                               semanticLabel: 'Локація',
                             ),
                           ),
@@ -586,19 +507,22 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 4,
-                              top: 6,
+                              bottom: 38,
                             ),
                             child: Text(
                               widget.cars[index].attributes[0].options[0],
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
                       ],
-                    ),
+                    )),
+
+                     Positioned.fill(
+      child:
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -607,15 +531,16 @@ Padding(
                           child: Padding(
                               padding: const EdgeInsets.only(
                                 left: 12,
-                                top: 6,
+                               
+                                bottom: 12
                               ),
                               child: Text(
-                                "${_convertCurrency(widget.cars[index].price)}" +
+                                                               "${_convertCurrency(widget.cars[index].price)}" +
                                     r" $",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white,
-                                    fontSize: 20),
+                                    fontSize: 16),
                               )),
                         ),
                         Align(
@@ -623,7 +548,8 @@ Padding(
                           child: Padding(
                             padding: const EdgeInsets.only(
                               right: 12,
-                              top: 6,
+                              
+                              bottom: 12
                             ),
                             child: Text(
                               _convertTimeToString(
@@ -631,13 +557,16 @@ Padding(
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey,
-                                  fontSize: 15),
+                                  fontSize: 12),
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ],
+                     )
+                    ]))),
+                   
+                    ],
                 ),
               );
             },
@@ -654,15 +583,14 @@ Padding(
             child: CupertinoActivityIndicator(),
             top: MediaQuery.of(context).size.height / 2 - 20,
             left: MediaQuery.of(context).size.width / 2 - 20,
-          )*/
+          )
+           if (isLoading)
+            CupertinoActivityIndicator()
+          else if (isLoading1)
+            CupertinoActivityIndicator()
+          */
 
-          if (isLoading)
-         CupertinoActivityIndicator()
-           
-          
-        else if (isLoading1)
-         CupertinoActivityIndicator()
-           
+         
         ],
       ),
     );

@@ -44,8 +44,8 @@ final String searchFieldLabel = "Марка чи модель авто";
   DataSearch(this.listWords);
 
 @override
-  void set query(String value) {
-    // TODO: implement query
+  set query(String value) {
+
     super.query = savesearch;
   }
 
@@ -54,6 +54,7 @@ final String searchFieldLabel = "Марка чи модель авто";
     //Actions for app bar
     return [IconButton(icon: Icon(Icons.clear), onPressed: () {
       query = '';
+      savesearch = '';
     })];
   }
 
@@ -79,20 +80,19 @@ ThemeData appBarTheme(BuildContext context) {
   assert(theme != null);
   return theme.copyWith(
 backgroundColor: Colors.red,
-
+ textTheme: TextTheme(
+      headline: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.grey),
+      title: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
+      body1: TextStyle(fontSize: 14.0, fontFamily: 'Raleway'),
+    ),
 inputDecorationTheme: InputDecorationTheme(hintStyle: Theme.of(context).textTheme.title.copyWith(color: Colors.grey)),
     primaryColor: Color(0xff183047),
 
-
-    textTheme: theme.textTheme.copyWith(title: theme.textTheme.title.copyWith(color: theme.primaryTextTheme.title.color)),
     primaryIconTheme: theme.primaryIconTheme.copyWith(color: Colors.white),
     primaryColorBrightness: Brightness.dark,
     primaryTextTheme: theme.textTheme,
     brightness: Brightness.dark,
-    accentColor: Colors.red,
 
-primaryColorDark: Colors.red,
-    scaffoldBackgroundColor: Colors.red
   );
 }
 
@@ -145,7 +145,7 @@ primaryColorDark: Colors.red,
                      ]),
                ),
              ),
-               itemCount: suggestionList.length,
+               itemCount: suggestionList.length < 10 ? suggestionList.length : 10
              )));
            }
          
@@ -194,7 +194,7 @@ primaryColorDark: Colors.red,
                      ]),
                ),
              ),
-               itemCount: suggestionList.length,
+           itemCount: suggestionList.length < 10 ? suggestionList.length : 10
              );
            }
          
