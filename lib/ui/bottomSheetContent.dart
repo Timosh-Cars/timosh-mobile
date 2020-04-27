@@ -24,7 +24,7 @@ class FavoriteWidget extends StatefulWidget {
       isSelected13,
       isSelected14,
       isSelected15,
-      isSelected16, 
+      isSelected16,
       isSelected17,
       isSelected18,
       isSelected19,
@@ -33,14 +33,13 @@ class FavoriteWidget extends StatefulWidget {
       isSelected22,
       isSelected23,
       isSelected24,
-           isSelected25,
+      isSelected25,
       isSelected26,
       isSelected27,
       isSelected28,
       isSelected29,
       isSelected30,
-      isSelected31
-      = false;
+      isSelected31 = false;
 
   bool d = false;
   @override
@@ -108,39 +107,40 @@ class _BottomSheetContent extends State<FavoriteWidget> {
             ),
           ),
           Expanded(
-            child: ListView(padding: EdgeInsets.only(right: 6.0, bottom:25), children: [
-              Wrap(direction: Axis.horizontal, children: [
-                Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                   
-                      top: 15,
-                    ),
-                    child: Text(
-                      'Кузов',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                          fontSize: 16),
-                    )),
-                _myChip(
-                    "isSelected", "filter=Седан", 'Седан', widget.isSelected),
-                _myChip("isSelected1", "filter=Хетчбек", 'Хетчбек',
-                    widget.isSelected1),
-                _myChip("isSelected2", "filter=Мікроавтобус", 'Мікроавтобус',
-                    widget.isSelected2),
-                _myChip("isSelecte3", "filter=Позашляховик", 'Позашляховик',
-                    widget.isSelected3),
-                _myChip("isSelected4", "filter=Універсал", 'Універсал',
-                    widget.isSelected4),
-                _myChip(
-                    "isSelected5", "filter=Купе", 'Купе', widget.isSelected5),
-                _myChip("isSelecte6", "filter=Мінівен", 'Мінівен',
-                    widget.isSelected6),
-                _myChip("isSelected7", "filter=Кабріолет", 'Кабріолет',
-                    widget.isSelected7),
-                _myChip(
-                    "isSelected8", "filter=Пікап", 'Пікап', widget.isSelected8),
+            child: ListView(
+                padding: EdgeInsets.only(right: 6.0, bottom: 25),
+                children: [
+                  Wrap(direction: Axis.horizontal, children: [
+                    Padding(
+                        padding: const EdgeInsets.only(
+                          left: 12,
+                          top: 15,
+                        ),
+                        child: Text(
+                          'Кузов',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              color: Colors.white,
+                              fontSize: 16),
+                        )),
+                    _myChip("isSelected", "filter=Седан", 'Седан',
+                        widget.isSelected),
+                    _myChip("isSelected1", "filter=Хетчбек", 'Хетчбек',
+                        widget.isSelected1),
+                    _myChip("isSelected2", "filter=Мікроавтобус",
+                        'Мікроавтобус', widget.isSelected2),
+                    _myChip("isSelecte3", "filter=Позашляховик", 'Позашляховик',
+                        widget.isSelected3),
+                    _myChip("isSelected4", "filter=Універсал", 'Універсал',
+                        widget.isSelected4),
+                    _myChip("isSelected5", "filter=Купе", 'Купе',
+                        widget.isSelected5),
+                    _myChip("isSelecte6", "filter=Мінівен", 'Мінівен',
+                        widget.isSelected6),
+                    _myChip("isSelected7", "filter=Кабріолет", 'Кабріолет',
+                        widget.isSelected7),
+                    _myChip("isSelected8", "filter=Пікап", 'Пікап',
+                        widget.isSelected8),
 
 /*
                 Padding(
@@ -223,180 +223,161 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                       ),
                     )),
             */
-              ]),
-              Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Wrap(direction: Axis.horizontal, children: [
-                    Padding(
-                        padding: const EdgeInsets.only(
-                          left: 12,
-                        
-                          top: 15,
-                        ),
-                        child: Text(
-                          'Рік випуску',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16),
-                        )),
-                    _myChip("isSelected9", "filter=- 1980", '- 1980',
-                        widget.isSelected9),
-                    _myChip("isSelected10", "filter=1980-1990", '1980 - 1990',
-                        widget.isSelected10),
-                    _myChip("isSelected11", "filter=1990-2000", '1990 - 2000',
-                        widget.isSelected11),
-                    _myChip("isSelected12", "filter=2000-2010", '2000 - 2010',
-                        widget.isSelected12),
-                    _myChip("isSelected13", "filter=2010-2019", '2010 - 2019',
-                        widget.isSelected13),
-                    _myChip("isSelected14", "filter=2020 +", '2020 +',
-                        widget.isSelected14),
-                  ])),
-
-
-        Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Wrap(direction: Axis.horizontal, children: [
-                    Padding(
-                        padding: const EdgeInsets.only(
-                          left: 12,
-                          
-                          top: 15,
-                        ),
-                        child: Text(
-                          'Пробіг',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16),
-                        )),
-                    _myChip("isSelected15", "filter=0 - 10 000 км", '0 - 10 000 км',
-                        widget.isSelected15),
-                    _myChip("isSelected16", "filter=10 000 - 50 000 км", '10 000 - 50 000 км',
-                        widget.isSelected16),
-                    _myChip("isSelected17", "filter=50 000 - 100 000 км", '50 000 - 100 000 км',
-                        widget.isSelected17),
-                    _myChip("isSelected18", "filter=100 000 км і більше", '100 000 км і більше',
-                        widget.isSelected18),
-                   
-                  ])),
-
-
-
-      Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Wrap(direction: Axis.horizontal, children: [
-                    Padding(
-                        padding: const EdgeInsets.only(
-                          left: 12,
-                    
-                          top: 15,
-                        ),
-                        child: Text(
-                          'Привід',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16),
-                        )),
-                    _myChip("isSelected19", "filter=Повний", 'Повний',
-                        widget.isSelected19),
-                    _myChip("isSelected20", "filter=Задній", 'Задній',
-                        widget.isSelected20),
-                    _myChip("isSelected21", "filter=Передній", 'Передній',
-                        widget.isSelected21),
-                   
-                  ])),
-
-                    Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Wrap(direction: Axis.horizontal, children: [
-                    Padding(
-                        padding: const EdgeInsets.only(
-                          left: 12,
-                          top: 15,
-                        ),
-                        child: Text(
-                          'Коробка',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16),
-                        )),
-                    _myChip("isSelected22", "filter=Механіка", 'Механіка',
-                        widget.isSelected22),
-                    _myChip("isSelected23", "filter=Автомат", 'Автомат',
-                        widget.isSelected23),
-                
-                   
-                  ])),
-
-
-                          Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Wrap(direction: Axis.horizontal, children: [
-                    Padding(
-                        padding: const EdgeInsets.only(
-                          left: 12,
-                          top: 15,
-                        ),
-                        child: Text(
-                          'Паливо',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16),
-                        )),
-                    _myChip("isSelected24", "filter=Бензин", 'Бензин',
-                        widget.isSelected24),
-                    _myChip("isSelected25", "filter=Дизель", 'Дизель',
-                        widget.isSelected25),
-                  _myChip("isSelected26", "filter=Електро", 'Електро',
-                        widget.isSelected26),  _myChip("isSelected27", "filter=Газ", 'Газ',
-                        widget.isSelected27),  
+                  ]),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: Wrap(direction: Axis.horizontal, children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              top: 15,
+                            ),
+                            child: Text(
+                              'Рік випуску',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  fontSize: 16),
+                            )),
+                        _myChip("isSelected9", "filter=- 1980", '- 1980',
+                            widget.isSelected9),
+                        _myChip("isSelected10", "filter=1980-1990",
+                            '1980 - 1990', widget.isSelected10),
+                        _myChip("isSelected11", "filter=1990-2000",
+                            '1990 - 2000', widget.isSelected11),
+                        _myChip("isSelected12", "filter=2000-2010",
+                            '2000 - 2010', widget.isSelected12),
+                        _myChip("isSelected13", "filter=2010-2019",
+                            '2010 - 2019', widget.isSelected13),
+                        _myChip("isSelected14", "filter=2020 +", '2020 +',
+                            widget.isSelected14),
+                      ])),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: Wrap(direction: Axis.horizontal, children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              top: 15,
+                            ),
+                            child: Text(
+                              'Пробіг',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  fontSize: 16),
+                            )),
+                        _myChip("isSelected15", "filter=0 - 10 000 км",
+                            '0 - 10 000 км', widget.isSelected15),
+                        _myChip("isSelected16", "filter=10 000 - 50 000 км",
+                            '10 000 - 50 000 км', widget.isSelected16),
+                        _myChip("isSelected17", "filter=50 000 - 100 000 км",
+                            '50 000 - 100 000 км', widget.isSelected17),
+                        _myChip("isSelected18", "filter=100 000 км і більше",
+                            '100 000 км і більше', widget.isSelected18),
+                      ])),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: Wrap(direction: Axis.horizontal, children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              top: 15,
+                            ),
+                            child: Text(
+                              'Привід',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  fontSize: 16),
+                            )),
+                        _myChip("isSelected19", "filter=Повний", 'Повний',
+                            widget.isSelected19),
+                        _myChip("isSelected20", "filter=Задній", 'Задній',
+                            widget.isSelected20),
+                        _myChip("isSelected21", "filter=Передній", 'Передній',
+                            widget.isSelected21),
+                      ])),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: Wrap(direction: Axis.horizontal, children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              top: 15,
+                            ),
+                            child: Text(
+                              'Коробка',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  fontSize: 16),
+                            )),
+                        _myChip("isSelected22", "filter=Механіка", 'Механіка',
+                            widget.isSelected22),
+                        _myChip("isSelected23", "filter=Автомат", 'Автомат',
+                            widget.isSelected23),
+                      ])),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: Wrap(direction: Axis.horizontal, children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              top: 15,
+                            ),
+                            child: Text(
+                              'Паливо',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  fontSize: 16),
+                            )),
+                        _myChip("isSelected24", "filter=Бензин", 'Бензин',
+                            widget.isSelected24),
+                        _myChip("isSelected25", "filter=Дизель", 'Дизель',
+                            widget.isSelected25),
+                        _myChip("isSelected26", "filter=Електро", 'Електро',
+                            widget.isSelected26),
+                        _myChip("isSelected27", "filter=Газ", 'Газ',
+                            widget.isSelected27),
                         _myChip("isSelected28", "filter=Гибрид", 'Гибрид',
-                        widget.isSelected28), 
-                  ])),
-
-
-
-                                 Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: Wrap(direction: Axis.horizontal, children: [
-                    Padding(
-                        padding: const EdgeInsets.only(
-                          left: 12,
-                          top: 15,
-                        ),
-                        child: Text(
-                          'Таможня',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16),
-                        )),
-                    _myChip("isSelected29", "filter=Розмитнена", 'Розмитнена',
-                        widget.isSelected29),
-                    _myChip("isSelected30", "filter=Нерозмитнена", 'Нерозмитнена',
-                        widget.isSelected30),
-                 
-                  ])),
-   
-              SliderWidget(),
-            ]),
+                            widget.isSelected28),
+                      ])),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: Wrap(direction: Axis.horizontal, children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12,
+                              top: 15,
+                            ),
+                            child: Text(
+                              'Таможня',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  fontSize: 16),
+                            )),
+                        _myChip("isSelected29", "filter=Розмитнена",
+                            'Розмитнена', widget.isSelected29),
+                        _myChip("isSelected30", "filter=Нерозмитнена",
+                            'Нерозмитнена', widget.isSelected30),
+                      ])),
+                  SliderWidget(),
+                ]),
           ),
         ],
       ),

@@ -11,34 +11,33 @@ var map = {"isSelected": false, "isSelected1": false, "isSelected2": false};
 var map1 = Map();
 abc() {
   String abc = cba;
-  print(abc);
+  
   return abc;
 }
 String categories = "all";
 toggleFavorite(bool b, String a) {
   if (b) {
     cba += a;
-    print(cba);
+
 
     return;
   }
   cba = cba.replaceAll(a, "");
 
-  print(cba);
+
 }
 
 toggleprice(double b) {
   if (rng > 0) {
     savevalue = "&max_price=${rng.round()}";
 
-    print(savevalue);
     return;
   } else {
     savevalue = "";
   }
   savevalue = savevalue.replaceAll("&max_price=${rng.round()}", "");
 
-  print(savevalue);
+
 }
 
 priceConvert(double a) {

@@ -18,21 +18,39 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Car selectedCar = ModalRoute.of(context).settings.arguments;
 
+    _convertTimeToString(String dateCreated) {
+      final difference =
+          DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
+      if (difference <= 0) {
+        dateCreated = 'зараз';
+      } else if (difference < 60) {
+        dateCreated = "${difference} сек. тому";
+      } else if (difference < 3600) {
+        dateCreated = "${(difference / 60).floor()} хв. тому";
+      } else if (difference < 86400) {
+        dateCreated = "${(difference / 3600).floor()} год. тому";
+      } else if (difference < 604800) {
+        dateCreated = "${(difference / 86400).floor()} дн. тому";
+      } else if (difference < 2592000) {
+        dateCreated = "${(difference / 604800).floor()} тиж. тому";
+      } else if (difference < 31536000) {
+        dateCreated = "${(difference / 2592000).floor()} міс. тому";
+      } else if (difference > 31536000) {
+        dateCreated = "${(difference / 31536000).floor()} рк. тому";
+      }
+      return dateCreated;
+    }
 
-  _convertTimeToString(String dateCreated) {
-    final difference = DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
-    if(difference <= 0){dateCreated = 'зараз';}
-    else if(difference < 60){dateCreated = "${difference} сек. тому";}
-    else if(difference < 3600) {dateCreated = "${(difference/60).floor()} хв. тому";}
-    else if(difference < 86400){dateCreated = "${(difference/3600).floor()} год. тому";}
-    else if(difference < 604800){dateCreated = "${(difference/86400).floor()} дн. тому";}
-    else if(difference < 2592000){dateCreated = "${(difference/604800).floor()} тиж. тому";}
-    else if(difference < 31536000) {dateCreated = "${(difference/2592000).floor()} міс. тому";}
-    else if(difference > 31536000) {dateCreated = "${(difference/31536000).floor()} рк. тому";}
-    return dateCreated;
-  }
-_removeAllHtmlTags(String htmlText) {RegExp exp = RegExp(r"<[^>]*>",multiLine: true,caseSensitive: true);return htmlText.replaceAll(exp, '');}
-_convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(currency), Currency.create('UAH', 0));return costPrice.format("###,###").replaceAll(',', ' ');}
+    _removeAllHtmlTags(String htmlText) {
+      RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+      return htmlText.replaceAll(exp, '');
+    }
+
+    _convertCurrency(String currency) {
+      Money costPrice =
+          Money.fromInt(int.parse(currency), Currency.create('UAH', 0));
+      return costPrice.format("###,###").replaceAll(',', ' ');
+    }
 
     return Scaffold(
         backgroundColor: Color(0xaa15202b),
@@ -62,31 +80,29 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                       ),
                     ))))),
 */
-                    floatingActionButton: Container(
-                    height: 50,
-                  
-                    margin: EdgeInsets.only(left:12,right:12, bottom:12 ),
-                    width: double.infinity,
-                    child: FloatingActionButton.extended(
-                      
-                      backgroundColor: Color(0xff82cc00),
-                      
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
-  onPressed: () {  launch("tel:${selectedCar.attributes[3].options[0]}");},
-  label: Text("Передзвонити",      style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                    fontSize: 16),),
-),),
-
- floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Container(
+          height: 50,
+          margin: EdgeInsets.only(left: 12, right: 12, bottom: 12),
+          width: double.infinity,
+          child: FloatingActionButton.extended(
+            backgroundColor: Color(0xff82cc00),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            onPressed: () {
+              launch("tel:${selectedCar.attributes[3].options[0]}");
+            },
+            label: Text(
+              "Передзвонити",
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                  fontSize: 16),
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: ListView(padding: EdgeInsets.all(0), children: [
-
-
           Stack(children: <Widget>[
-            
-
-
             ListView.builder(
               padding: EdgeInsets.symmetric(vertical: 0),
               itemCount: 1,
@@ -125,7 +141,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                     top: 6,
                   ),
                   child: Text(
-                     _convertTimeToString(selectedCar.dateCreated),
+                    _convertTimeToString(selectedCar.dateCreated),
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
@@ -289,7 +305,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                       top: 16,
                                       right: 16,
                                     ),
-                                    child: Text(selectedCar.attributes[0].options[0],
+                                    child: Text(
+                                        selectedCar.attributes[0].options[0],
                                         style: TextStyle(
                                             fontWeight: FontWeight.w400,
                                             color: Colors.white,
@@ -313,7 +330,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                     top: 18,
                                     right: 18,
                                   ),
-                                  child: Text(selectedCar.attributes[14].options[0],
+                                  child: Text(
+                                      selectedCar.attributes[14].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -339,7 +357,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                     top: 18,
                                     right: 16,
                                   ),
-                                  child: Text("${_convertCurrency(selectedCar.attributes[2].options[0])} км",
+                                  child: Text(
+                                      "${_convertCurrency(selectedCar.attributes[2].options[0])} км",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -357,7 +376,7 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize:14)))),
+                                            fontSize: 14)))),
                             TableCell(
                                 child: Padding(
                               padding: const EdgeInsets.only(
@@ -389,7 +408,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                     top: 18,
                                     right: 16,
                                   ),
-                                  child: Text(selectedCar.attributes[5].options[0],
+                                  child: Text(
+                                      selectedCar.attributes[5].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -412,7 +432,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                               child: Padding(
                                   padding:
                                       const EdgeInsets.only(top: 18, right: 16),
-                                  child: Text(selectedCar.attributes[6].options[0],
+                                  child: Text(
+                                      selectedCar.attributes[6].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -435,7 +456,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                               child: Padding(
                                   padding:
                                       const EdgeInsets.only(top: 18, right: 16),
-                                  child: Text(selectedCar.attributes[7].options[0],
+                                  child: Text(
+                                      selectedCar.attributes[7].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -460,7 +482,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                                     top: 18,
                                     right: 16,
                                   ),
-                                  child: Text(selectedCar.attributes[8].options[0],
+                                  child: Text(
+                                      selectedCar.attributes[8].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -483,11 +506,12 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                               child: Padding(
                                   padding:
                                       const EdgeInsets.only(top: 18, right: 16),
-                                  child: Text(selectedCar.attributes[9].options[0],
+                                  child: Text(
+                                      selectedCar.attributes[9].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontSize:14))),
+                                          fontSize: 14))),
                             ),
                           ]),
                           TableRow(children: [
@@ -506,7 +530,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                               child: Padding(
                                   padding: const EdgeInsets.only(
                                       top: 18, right: 16, bottom: 16),
-                                  child: Text(selectedCar.attributes[10].options[0],
+                                  child: Text(
+                                      selectedCar.attributes[10].options[0],
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -525,9 +550,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
                       child: Padding(
                           padding: const EdgeInsets.only(
                               right: 16, left: 16, top: 16),
-                          child: Text( 
-                              _removeAllHtmlTags(selectedCar.description)
-                              ,
+                          child: Text(
+                              _removeAllHtmlTags(selectedCar.description),
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
@@ -540,13 +564,8 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
     var arr = selectedCar.attributes[15].options[0].split(' ');
     final List<Widget> _pages = <Widget>[
       for (var i = 0; i < arr.length; i++)
-       Image.network(
-              arr[i],
-              
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity
-            ),
+        Image.network(arr[i],
+            fit: BoxFit.cover, width: double.infinity, height: double.infinity),
     ];
 
     return Column(
@@ -556,14 +575,14 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
           height: MediaQuery.of(context).size.width * 1.30,
           child: Stack(
             children: <Widget>[
-               PageView.builder(
-                    // store this controller in a State to save the carousel scroll position
-                    controller: _controller,
-                    itemCount: _pages.length,
-                    itemBuilder: (BuildContext context, int itemIndex) {
-                      return _pages[itemIndex % _pages.length];
-                    },
-                  ),
+              PageView.builder(
+                // store this controller in a State to save the carousel scroll position
+                controller: _controller,
+                itemCount: _pages.length,
+                itemBuilder: (BuildContext context, int itemIndex) {
+                  return _pages[itemIndex % _pages.length];
+                },
+              ),
               Positioned(
                 top: 42.0,
                 left: 12.0,
@@ -608,7 +627,6 @@ _convertCurrency(String currency) {Money costPrice = Money.fromInt(int.parse(cur
             ],
           ),
         ),
-        
       ],
     );
   }

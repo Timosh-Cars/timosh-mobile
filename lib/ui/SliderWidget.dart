@@ -26,10 +26,7 @@ class _SliderWidgetState extends State<SliderWidget> {
     if (this.widget.fullWidth) paddingFactor = .3;
 
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 12,
-        right:6
-      ),
+      padding: const EdgeInsets.only(left: 12, right: 6),
       child: Stack(
         children: <Widget>[
           Padding(
@@ -44,7 +41,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                     fontSize: 16),
               )),
           Padding(
-              padding: EdgeInsets.only(top: 60, left:0),
+              padding: EdgeInsets.only(top: 60, left: 0),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: Container(
@@ -53,7 +50,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                       margin: const EdgeInsets.only(top: 0.0),
                       height: 45))),
           Padding(
-              padding: EdgeInsets.only(top: 60, right:0),
+              padding: EdgeInsets.only(top: 60, right: 0),
               child: Align(
                   alignment: Alignment.centerRight,
                   child: ClipRRect(
@@ -97,13 +94,11 @@ class _SliderWidgetState extends State<SliderWidget> {
                       onChangeStart: (value) {
                         setState(() {
                           libre = true;
-                          print(libre);
                         });
                       },
                       onChangeEnd: (value) {
                         setState(() {
                           libre = false;
-                          print(libre);
                         });
                       },
                       onChanged: (value) {
@@ -113,8 +108,6 @@ class _SliderWidgetState extends State<SliderWidget> {
                           rng = value;
                           toggleprice(value);
                         });
-
-                        print(value);
                       }),
                 ),
               )),
