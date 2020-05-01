@@ -1,3 +1,5 @@
+import 'package:money2/money2.dart';
+
 String cba = "sort=";
 double rng = 0;
 String savevalue = "";
@@ -52,3 +54,37 @@ priceConvert(double a) {
   }
   return ghh;
 }
+
+  convertCurrency(String currency) {
+    Money costPrice =
+        Money.fromInt(int.parse(currency), Currency.create('UAH', 0));
+    return costPrice.format("###,###").replaceAll(',', ' ');
+  }
+
+    removeAllHtmlTags(String htmlText) {
+      RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+      return htmlText.replaceAll(exp, '');
+    }
+
+  convertTimeToString(String dateCreated) {
+    final difference =
+        DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
+    if (difference <= 0) {
+      dateCreated = 'зараз';
+    } else if (difference < 60) {
+      dateCreated = "${difference} сек. тому";
+    } else if (difference < 3600) {
+      dateCreated = "${(difference / 60).floor()} хв. тому";
+    } else if (difference < 86400) {
+      dateCreated = "${(difference / 3600).floor()} год. тому";
+    } else if (difference < 604800) {
+      dateCreated = "${(difference / 86400).floor()} дн. тому";
+    } else if (difference < 2592000) {
+      dateCreated = "${(difference / 604800).floor()} тиж. тому";
+    } else if (difference < 31536000) {
+      dateCreated = "${(difference / 2592000).floor()} міс. тому";
+    } else if (difference > 31536000) {
+      dateCreated = "${(difference / 31536000).floor()} рк. тому";
+    }
+    return dateCreated;
+  }

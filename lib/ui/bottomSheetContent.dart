@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:timosh_app/providers/Sort.dart';
-import 'package:timosh_app/providers/carsProvider.dart';
-import 'package:flutter/src/material/slider.dart';
-
 import 'SliderWidget.dart';
 
 class FavoriteWidget extends StatefulWidget {
-  Function updateList;
+
 
   bool isSelected,
       isSelected1,
@@ -49,10 +46,9 @@ class FavoriteWidget extends StatefulWidget {
 class _BottomSheetContent extends State<FavoriteWidget> {
   var selectedRange = RangeValues(0.2, 0.8);
 
-  bool isLoading1 = false;
-  Function updateList;
-  int indexSelected = -1;
-  var selectedChip = 0;
+
+
+
   bool _isFavorited = true;
 
   bool b = true;

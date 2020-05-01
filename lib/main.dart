@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:timosh_app/providers/carsProvider.dart';
 import 'package:timosh_app/ui/carsList.dart';
 import 'models/car.dart';
-import 'ui/bottomSheetContent.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,13 +14,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Raleway',
-        accentColor: Color(0xff183047),
-        backgroundColor: Color(0xff183047),
-        primaryColor: Color(0xff183047),
+        accentColor: Color(0xff183047).withOpacity(1),
+        backgroundColor: Color(0xff183047).withOpacity(1),
+        primaryColor: Color(0xff183047).withOpacity(1),
         primaryColorBrightness: Brightness.dark,
         brightness: Brightness.dark,
-        primaryColorDark: Color(0xff183047),
-        scaffoldBackgroundColor: Color(0xff183047),
+        primaryColorDark: Color(0xff183047).withOpacity(1),
+        scaffoldBackgroundColor: Color(0xff183047).withOpacity(1),
       ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
@@ -86,7 +85,6 @@ class HomePage extends StatelessWidget {
         future: CarsProvider().fetchCars(),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
-
           return snapshot.hasData
               ? CarsList(cars: snapshot.data)
               : Stack(children: [

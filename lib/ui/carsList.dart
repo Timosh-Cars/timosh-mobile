@@ -5,8 +5,6 @@ import 'package:timosh_app/Searchb.dart';
 import 'package:timosh_app/models/car.dart';
 import 'package:timosh_app/providers/Sort.dart';
 import 'package:timosh_app/providers/carsProvider.dart';
-import 'package:money2/money2.dart';
-import 'package:timosh_app/ui/ModalInsideModal.dart';
 import 'bottomSheetContent.dart';
 import 'detailsPage.dart';
 
@@ -58,41 +56,12 @@ class CarsListState extends State<CarsList> {
     super.initState();
   }
 
-  _convertTimeToString(String dateCreated) {
-    final difference =
-        DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
-    if (difference <= 0) {
-      dateCreated = 'зараз';
-    } else if (difference < 60) {
-      dateCreated = "${difference} сек. тому";
-    } else if (difference < 3600) {
-      dateCreated = "${(difference / 60).floor()} хв. тому";
-    } else if (difference < 86400) {
-      dateCreated = "${(difference / 3600).floor()} год. тому";
-    } else if (difference < 604800) {
-      dateCreated = "${(difference / 86400).floor()} дн. тому";
-    } else if (difference < 2592000) {
-      dateCreated = "${(difference / 604800).floor()} тиж. тому";
-    } else if (difference < 31536000) {
-      dateCreated = "${(difference / 2592000).floor()} міс. тому";
-    } else if (difference > 31536000) {
-      dateCreated = "${(difference / 31536000).floor()} рк. тому";
-    }
-    return dateCreated;
-  }
-
-  _convertCurrency(String currency) {
-    Money costPrice =
-        Money.fromInt(int.parse(currency), Currency.create('UAH', 0));
-    return costPrice.format("###,###").replaceAll(',', ' ');
-  }
-
   loadMoreCars() async {
     setState(() => isLoading = true);
     _offset++;
     var carsToAdd =
         await _carsProvider.fetchCars(_offset, cba, savevalue, categories);
-        
+
     setState(() {
       widget.cars.addAll(carsToAdd);
     });
@@ -109,14 +78,6 @@ class CarsListState extends State<CarsList> {
     setState(() => isLoading1 = false);
   }
 */
-
-  static AnimationController createAnimationController(TickerProvider vsync) {
-    return AnimationController(
-      duration: Duration(milliseconds: 1000),
-      debugLabel: 'BottomSheet',
-      vsync: vsync,
-    );
-  }
 
   closebottom(int a, String b, String pricing, String ctg) async {
     setState(() => isLoading1 = true);
@@ -153,20 +114,24 @@ class CarsListState extends State<CarsList> {
     // print(widget.cars.length);
     return Scaffold(
       backgroundColor: Color(0xaa15202b).withOpacity(1),
-      floatingActionButton: FlatButton(
-        onPressed: () {},
+      /* floatingActionButton: FlatButton(
+        onPressed: () {
+        
+
+        
+        },
         shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(12.0)),
         color: Color(0xaa15202b),
         textColor: Colors.white,
         padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
         child: Icon(Icons.filter_list),
-      ),
+      ),*/
       body: ListView(
         controller: _controller,
         children: <Widget>[
-        //  if (isLoading) CupertinoActivityIndicator(),
-        //  if (isLoading1) CupertinoActivityIndicator(),
+          //  if (isLoading) CupertinoActivityIndicator(),
+          //  if (isLoading1) CupertinoActivityIndicator(),
 
 /*
                   Container(
@@ -195,8 +160,7 @@ class CarsListState extends State<CarsList> {
                           closebottom(1, cba, savevalue, categories);
                         });
                       },
-                     
-        child: Container(
+                      child: Container(
                           padding: EdgeInsets.only(left: 6, right: 12),
                           height: 50,
                           color: Color(0xff183047),
@@ -212,36 +176,22 @@ class CarsListState extends State<CarsList> {
                                       size: 24.0,
                                       semanticLabel: 'Пошук',
                                     )),
-                               Flexible( child: Text(
-                                  savesearch.isEmpty
-                                      ? 'Введіть марку або модель авто'
-                                      : savesearch ,
-                                      overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                 
-                                      color: savesearch.isEmpty
-                                          ? Colors.grey
-                                          : Colors.white,
-                                      fontSize: 14),
-                                ),
-        )])))
-                      /*
-TextField(
-  
-  decoration: InputDecoration(
-       border: new OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-        Radius.circular(12.0),
-        ),
-      ),
-fillColor: Color(0xff183047), filled: true,
-  
-        labelText: 'Введіть марку чи модель авто',
-    
-  ),
-)*/
+                                Flexible(
+                                  child: Text(
+                                    savesearch.isEmpty
+                                        ? 'Введіть марку або модель авто'
+                                        : savesearch,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        color: savesearch.isEmpty
+                                            ? Colors.grey
+                                            : Colors.white,
+                                        fontSize: 14),
+                                  ),
+                                )
+                              ])))
                       ))),
           Align(
               alignment: Alignment.bottomLeft,
@@ -267,16 +217,17 @@ fillColor: Color(0xff183047), filled: true,
                             color: Colors.white,
                             fontSize: 14)),
                   ))),
+
+
           ListView.builder(
-            padding: EdgeInsets.only(bottom: 70),
+            padding: EdgeInsets.only(bottom: 12),
             itemCount: widget.cars.length,
-             physics: ClampingScrollPhysics(),
+            physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
+              print(widget.cars.length);
               return InkWell(
                 onTap: () =>
-                    /* _refreshCars() */
-
                     Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -295,7 +246,6 @@ fillColor: Color(0xff183047), filled: true,
                           bottom: 12,
                           right: 12,
                         ),
-                        // handle your onTap here
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Stack(children: <Widget>[
@@ -327,9 +277,9 @@ fillColor: Color(0xff183047), filled: true,
                                 alignment: Alignment.bottomLeft,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                    left: 12,
+                                    left: 14,
                                     right: 12,
-                                    bottom: 83,
+                                    bottom: 87,
                                   ),
                                   child: Text(
                                     widget.cars[index].name,
@@ -349,13 +299,13 @@ fillColor: Color(0xff183047), filled: true,
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
                                         padding: const EdgeInsets.only(
-                                          left: 12,
-                                          bottom: 60,
+                                          left: 14,
+                                          bottom: 62,
                                         ),
                                         child: Padding(
                                           padding: EdgeInsets.only(left: 0),
                                           child: Text(
-                                            "${_convertCurrency(widget.cars[index].attributes[2].options[0])} км",
+                                            "${convertCurrency(widget.cars[index].attributes[2].options[0])} км",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 color: Colors.white,
@@ -368,7 +318,7 @@ fillColor: Color(0xff183047), filled: true,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 6,
-                                        bottom: 60,
+                                        bottom: 62,
                                       ),
                                       child: Text(
                                         '•',
@@ -384,7 +334,7 @@ fillColor: Color(0xff183047), filled: true,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 6,
-                                        bottom: 60,
+                                        bottom: 62,
                                       ),
                                       child: Text(
                                         widget.cars[index].attributes[4]
@@ -401,7 +351,7 @@ fillColor: Color(0xff183047), filled: true,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 6,
-                                        bottom: 60,
+                                        bottom: 62,
                                       ),
                                       child: Text(
                                         '•',
@@ -417,7 +367,7 @@ fillColor: Color(0xff183047), filled: true,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 6,
-                                        bottom: 60,
+                                        bottom: 62,
                                       ),
                                       child: Text(
                                         widget.cars[index].attributes[5]
@@ -434,7 +384,7 @@ fillColor: Color(0xff183047), filled: true,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 6,
-                                        bottom: 60,
+                                        bottom: 62,
                                       ),
                                       child: Text(
                                         '•',
@@ -450,7 +400,7 @@ fillColor: Color(0xff183047), filled: true,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 6,
-                                        bottom: 60,
+                                        bottom: 62,
                                       ),
                                       child: Text(
                                         widget.cars[index].attributes[7]
@@ -472,8 +422,8 @@ fillColor: Color(0xff183047), filled: true,
                                     alignment: Alignment.bottomLeft,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
-                                        left: 12,
-                                        bottom: 38,
+                                        left: 14,
+                                        bottom: 42,
                                       ),
                                       child: Icon(
                                         Icons.location_on,
@@ -488,7 +438,7 @@ fillColor: Color(0xff183047), filled: true,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 4,
-                                        bottom: 38,
+                                        bottom: 42,
                                       ),
                                       child: Text(
                                         widget.cars[index].attributes[0]
@@ -511,9 +461,9 @@ fillColor: Color(0xff183047), filled: true,
                                       alignment: Alignment.bottomLeft,
                                       child: Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 12, bottom: 12),
+                                              left: 16, bottom: 14),
                                           child: Text(
-                                            "${_convertCurrency(widget.cars[index].price)}" +
+                                            "${convertCurrency(widget.cars[index].price)}" +
                                                 r" $",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w500,
@@ -525,9 +475,9 @@ fillColor: Color(0xff183047), filled: true,
                                       alignment: Alignment.bottomLeft,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 12, bottom: 12),
+                                            right: 14, bottom: 14),
                                         child: Text(
-                                          _convertTimeToString(
+                                          convertTimeToString(
                                               widget.cars[index].dateCreated),
                                           style: TextStyle(
                                               fontWeight: FontWeight.w400,
@@ -562,7 +512,47 @@ fillColor: Color(0xff183047), filled: true,
             CupertinoActivityIndicator()
           else if (isLoading1)
             CupertinoActivityIndicator()
+
+                  Container(
+  height: 20,
+  margin: EdgeInsets.only(
+                                           bottom: 20),
+  child:
+  Stack(
+children:[
+
+Positioned(
+left: MediaQuery.of(context).size.width / 2 - 10,
+  child: 
+Visibility( 
+  visible: isLoading ? true : false,
+  child:
+  Align(
+     alignment: Alignment.centerRight,
+    child:CupertinoActivityIndicator(
+ radius: 10,
+  )
+  ),)
+  )
+]
+
+  )
+  )
           */
+
+          Container(
+  height: 20,
+  margin: EdgeInsets.only(
+                                           bottom: 20),
+  child: Align(
+    
+      alignment: Alignment.topCenter,
+      child:Visibility( 
+  visible: isLoading ? true : false,
+  child:CupertinoActivityIndicator(
+  )
+  ),
+))
         ],
       ),
     );

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:timosh_app/models/car.dart';
+import 'package:timosh_app/providers/Sort.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:money2/money2.dart';
 import 'dotsIndicator.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -18,42 +17,8 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Car selectedCar = ModalRoute.of(context).settings.arguments;
 
-    _convertTimeToString(String dateCreated) {
-      final difference =
-          DateTime.now().difference(DateTime.parse(dateCreated)).inSeconds;
-      if (difference <= 0) {
-        dateCreated = 'зараз';
-      } else if (difference < 60) {
-        dateCreated = "${difference} сек. тому";
-      } else if (difference < 3600) {
-        dateCreated = "${(difference / 60).floor()} хв. тому";
-      } else if (difference < 86400) {
-        dateCreated = "${(difference / 3600).floor()} год. тому";
-      } else if (difference < 604800) {
-        dateCreated = "${(difference / 86400).floor()} дн. тому";
-      } else if (difference < 2592000) {
-        dateCreated = "${(difference / 604800).floor()} тиж. тому";
-      } else if (difference < 31536000) {
-        dateCreated = "${(difference / 2592000).floor()} міс. тому";
-      } else if (difference > 31536000) {
-        dateCreated = "${(difference / 31536000).floor()} рк. тому";
-      }
-      return dateCreated;
-    }
-
-    _removeAllHtmlTags(String htmlText) {
-      RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
-      return htmlText.replaceAll(exp, '');
-    }
-
-    _convertCurrency(String currency) {
-      Money costPrice =
-          Money.fromInt(int.parse(currency), Currency.create('UAH', 0));
-      return costPrice.format("###,###").replaceAll(',', ' ');
-    }
-
     return Scaffold(
-        backgroundColor: Color(0xaa15202b),
+        backgroundColor: Color(0xaa15202b).withOpacity(1),
 /*
    bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -141,7 +106,7 @@ class DetailScreen extends StatelessWidget {
                     top: 6,
                   ),
                   child: Text(
-                    _convertTimeToString(selectedCar.dateCreated),
+                    convertTimeToString(selectedCar.dateCreated),
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
@@ -191,7 +156,7 @@ class DetailScreen extends StatelessWidget {
                 top: 20,
               ),
               child: Text(
-                "${_convertCurrency(selectedCar.price)}" + r" $",
+                "${convertCurrency(selectedCar.price)}" + r" $",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
@@ -277,7 +242,7 @@ class DetailScreen extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
-                      color: Color(0xff183047),
+                      color: Color(0xff183047).withOpacity(1),
                       child: Table(
 //          defaultColumnWidth:
 //              FixedColumnWidth(MediaQuery.of(context).size.width / 3),
@@ -358,7 +323,7 @@ class DetailScreen extends StatelessWidget {
                                     right: 16,
                                   ),
                                   child: Text(
-                                      "${_convertCurrency(selectedCar.attributes[2].options[0])} км",
+                                      "${convertCurrency(selectedCar.attributes[2].options[0])} км",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
@@ -546,12 +511,12 @@ class DetailScreen extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
-                      color: Color(0xff183047),
+                      color: Color(0xff183047).withOpacity(1),
                       child: Padding(
                           padding: const EdgeInsets.only(
                               right: 16, left: 16, top: 16),
                           child: Text(
-                              _removeAllHtmlTags(selectedCar.description),
+                              removeAllHtmlTags(selectedCar.description),
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,

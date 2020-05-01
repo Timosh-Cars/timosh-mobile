@@ -2,36 +2,10 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:timosh_app/DataList.dart';
-import 'package:timosh_app/detail.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:timosh_app/DataList.dart';
 import 'package:timosh_app/providers/Sort.dart';
 
-/*
-class SearchBar extends StatelessWidget {
 
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Search App'),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search),
-              onPressed: () {
-                showSearch(context: context, delegate: DataSearch(listWords));
-              })
-        ],
-      ),
-      body: Center(
-          child: Text('default content')
-      ),
-      drawer: Drawer(),
-    );
-  }
-}
-*/
 
 class DataSearch extends SearchDelegate<String> {
   String a;
@@ -80,10 +54,13 @@ class DataSearch extends SearchDelegate<String> {
     return theme.copyWith(
       backgroundColor: Color(0xaa15202b),
       textTheme: TextTheme(
+        
         headline: TextStyle(
-            fontSize: 14.0, fontWeight: FontWeight.normal, color: Colors.grey),
-        title: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
-        body1: TextStyle(fontSize: 14.0, fontFamily: 'Raleway'),
+            fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.grey, fontFamily: 'Raleway'),
+            caption: TextStyle(   fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.grey, fontFamily: 'Raleway'),
+             subtitle: TextStyle(   fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.grey, fontFamily: 'Raleway'),
+        title: TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal, fontFamily: 'Raleway'),
+        body1: TextStyle(fontSize: 16.0, fontFamily: 'Raleway'),
       ),
       inputDecorationTheme: InputDecorationTheme(
           hintStyle:
