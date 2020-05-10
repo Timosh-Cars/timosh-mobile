@@ -2,6 +2,8 @@ import 'package:money2/money2.dart';
 
 String cba = "sort=";
 double rng = 0;
+ int offset = 1;
+ int currentPage = 0;
 String savevalue = "";
 String valuta;
 String ghh = "";

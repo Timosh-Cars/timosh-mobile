@@ -90,7 +90,9 @@ class DataSearch extends SearchDelegate<String> {
             itemBuilder: (context, index) => ListTile(
                   onTap: () {
                     close(context,'');
-                    savesearch = query;
+                    savesearch = suggestionList[index].definitionlist;
+                    offset = 1;
+                    currentPage=0;
                     /*
         Navigator.push(
           context,

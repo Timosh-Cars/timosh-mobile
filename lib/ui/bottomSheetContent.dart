@@ -3,8 +3,6 @@ import 'package:timosh_app/providers/Sort.dart';
 import 'SliderWidget.dart';
 
 class FavoriteWidget extends StatefulWidget {
-
-
   bool isSelected,
       isSelected1,
       isSelected2,
@@ -12,8 +10,8 @@ class FavoriteWidget extends StatefulWidget {
       isSelected4,
       isSelected5,
       isSelected6,
-      isSelected7,
-      isSelected8,
+      // isSelected7,
+      // isSelected8,
       isSelected9,
       isSelected10,
       isSelected11,
@@ -45,9 +43,6 @@ class FavoriteWidget extends StatefulWidget {
 
 class _BottomSheetContent extends State<FavoriteWidget> {
   var selectedRange = RangeValues(0.2, 0.8);
-
-
-
 
   bool _isFavorited = true;
 
@@ -119,106 +114,41 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                               color: Colors.white,
                               fontSize: 16),
                         )),
-                    _myChip("isSelected", "filter=Седан", 'Седан',
+                    _myChip(
+                        "isSelected",
+                        "&attribute=pa_кузов&attribute_term=24",
+                        'Седан',
                         widget.isSelected),
-                    _myChip("isSelected1", "filter=Хетчбек", 'Хетчбек',
+                    _myChip(
+                        "isSelected1",
+                        "f&attribute=pa_кузов&attribute_term=25",
+                        'Хетчбек',
                         widget.isSelected1),
-                    _myChip("isSelected2", "filter=Мікроавтобус",
-                        'Мікроавтобус', widget.isSelected2),
-                    _myChip("isSelecte3", "filter=Позашляховик", 'Позашляховик',
-                        widget.isSelected3),
-                    _myChip("isSelected4", "filter=Універсал", 'Універсал',
-                        widget.isSelected4),
-                    _myChip("isSelected5", "filter=Купе", 'Купе',
-                        widget.isSelected5),
-                    _myChip("isSelecte6", "filter=Мінівен", 'Мінівен',
-                        widget.isSelected6),
-                    _myChip("isSelected7", "filter=Кабріолет", 'Кабріолет',
-                        widget.isSelected7),
-                    _myChip("isSelected8", "filter=Пікап", 'Пікап',
-                        widget.isSelected8),
-
-/*
-                Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: ChoiceChip(
-                      backgroundColor: Color(0xff183047),
-                      selected:
-                          map["isSelected"] == null ? false : map["isSelected"],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Color(0xff82cc00),
-                      disabledColor: Color(0xff183047),
-                      onSelected: (state) {
-                        setState(() {
-                          widget.isSelected = !widget.isSelected;
-                          _isFavorited = widget.isSelected;
-                        });
-
-                        map["isSelected"] = state;
-                        toggleFavorite(state, "filter=Седан");
-                      },
-                      label: Text('Седан',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16)),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: ChoiceChip(
-                      backgroundColor: Color(0xff183047),
-                      selected: map["isSelected1"] == null
-                          ? false
-                          : map["isSelected1"],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Color(0xff82cc00),
-                      disabledColor: Color(0xff183047),
-                      onSelected: (state) {
-                        setState(() {
-                          widget.isSelected1 = !widget.isSelected1;
-                          _isFavorited = widget.isSelected1;
-                        });
-
-                        map["isSelected1"] = state;
-                        toggleFavorite(state, "filter=Хетчбек");
-                      },
-                      label: Text('Хетчбек',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                              fontSize: 16)),
-                    )),
-     
-                Padding(
-                    padding: const EdgeInsets.only(
-                      left: 12,
-                    ),
-                    child: InputChip(
-                      backgroundColor: Color(0xff183047),
-                      checkmarkColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                      selectedColor: Colors.blue,
-                      disabledColor: Color(0xff183047),
-                      onPressed: () {},
-                      label: Text(
+                    _myChip(
+                        "isSelected2",
+                        "&attribute=pa_кузов&attribute_term=26",
+                        'Мікроавтобус',
+                        widget.isSelected2),
+                    _myChip(
+                        "isSelecte3",
+                        "&attribute=pa_кузов&attribute_term=27",
                         'Позашляховик',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Colors.white,
-                            fontSize: 16),
-                      ),
-                    )),
-            */
+                        widget.isSelected3),
+                    _myChip(
+                        "isSelected4",
+                        "&attribute=pa_кузов&attribute_term=28",
+                        'Універсал',
+                        widget.isSelected4),
+                    _myChip(
+                        "isSelected5",
+                        "&attribute=pa_кузов&attribute_term=29",
+                        'Купе',
+                        widget.isSelected5),
+                    _myChip(
+                        "isSelecte6",
+                        "&attribute=pa_кузов&attribute_term=30",
+                        'Мінівен',
+                        widget.isSelected6)
                   ]),
                   Padding(
                       padding: const EdgeInsets.only(
@@ -237,17 +167,35 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                                   color: Colors.white,
                                   fontSize: 16),
                             )),
-                        _myChip("isSelected9", "filter=- 1980", '- 1980',
+                        _myChip(
+                            "isSelected9",
+                            "&attribute=pa_рік-випуску&attribute_term=110",
+                            '- 1980',
                             widget.isSelected9),
-                        _myChip("isSelected10", "filter=1980-1990",
-                            '1980 - 1990', widget.isSelected10),
-                        _myChip("isSelected11", "filter=1990-2000",
-                            '1990 - 2000', widget.isSelected11),
-                        _myChip("isSelected12", "filter=2000-2010",
-                            '2000 - 2010', widget.isSelected12),
-                        _myChip("isSelected13", "filter=2010-2019",
-                            '2010 - 2019', widget.isSelected13),
-                        _myChip("isSelected14", "filter=2020 +", '2020 +',
+                        _myChip(
+                            "isSelected10",
+                            "&attribute=pa_рік-випуску&attribute_term=114",
+                            '1980 - 1990',
+                            widget.isSelected10),
+                        _myChip(
+                            "isSelected11",
+                            "&attribute=pa_рік-випуску&attribute_term=113",
+                            '1990 - 2000',
+                            widget.isSelected11),
+                        _myChip(
+                            "isSelected12",
+                            "&attribute=pa_рік-випуску&attribute_term=109",
+                            '2000 - 2010',
+                            widget.isSelected12),
+                        _myChip(
+                            "isSelected13",
+                            "&attribute=pa_рік-випуску&attribute_term=1785",
+                            '2010 - 2019',
+                            widget.isSelected13),
+                        _myChip(
+                            "isSelected14",
+                            "&attribute=pa_рік-випуску&attribute_term=112",
+                            '2020 +',
                             widget.isSelected14),
                       ])),
                   Padding(
@@ -267,14 +215,26 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                                   color: Colors.white,
                                   fontSize: 16),
                             )),
-                        _myChip("isSelected15", "filter=0 - 10 000 км",
-                            '0 - 10 000 км', widget.isSelected15),
-                        _myChip("isSelected16", "filter=10 000 - 50 000 км",
-                            '10 000 - 50 000 км', widget.isSelected16),
-                        _myChip("isSelected17", "filter=50 000 - 100 000 км",
-                            '50 000 - 100 000 км', widget.isSelected17),
-                        _myChip("isSelected18", "filter=100 000 км і більше",
-                            '100 000 км і більше', widget.isSelected18),
+                        _myChip(
+                            "isSelected15",
+                            "&attribute=pa_пробіг&attribute_term=69",
+                            '0 - 10 000 км',
+                            widget.isSelected15),
+                        _myChip(
+                            "isSelected16",
+                            "&attribute=pa_пробіг&attribute_term=81",
+                            '10 000 - 50 000 км',
+                            widget.isSelected16),
+                        _myChip(
+                            "isSelected17",
+                            "&attribute=pa_пробіг&attribute_term=82",
+                            '50 000 - 100 000 км',
+                            widget.isSelected17),
+                        _myChip(
+                            "isSelected18",
+                            "&attribute=pa_пробіг&attribute_term=83",
+                            '100 000 км і більше',
+                            widget.isSelected18),
                       ])),
                   Padding(
                       padding: const EdgeInsets.only(
@@ -293,11 +253,20 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                                   color: Colors.white,
                                   fontSize: 16),
                             )),
-                        _myChip("isSelected19", "filter=Повний", 'Повний',
+                        _myChip(
+                            "isSelected19",
+                            "&attribute=pa_привід&attribute_term=64",
+                            'Повний',
                             widget.isSelected19),
-                        _myChip("isSelected20", "filter=Задній", 'Задній',
+                        _myChip(
+                            "isSelected20",
+                            "&attribute=pa_привід&attribute_term=65",
+                            'Задній',
                             widget.isSelected20),
-                        _myChip("isSelected21", "filter=Передній", 'Передній',
+                        _myChip(
+                            "isSelected21",
+                            "&attribute=pa_привід&attribute_term=66",
+                            'Передній',
                             widget.isSelected21),
                       ])),
                   Padding(
@@ -317,9 +286,15 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                                   color: Colors.white,
                                   fontSize: 16),
                             )),
-                        _myChip("isSelected22", "filter=Механіка", 'Механіка',
+                        _myChip(
+                            "isSelected22",
+                            "&attribute=pa_коробка&attribute_term=60",
+                            'Механіка',
                             widget.isSelected22),
-                        _myChip("isSelected23", "filter=Автомат", 'Автомат',
+                        _myChip(
+                            "isSelected23",
+                            "&attribute=pa_коробка&attribute_term=61",
+                            'Автомат',
                             widget.isSelected23),
                       ])),
                   Padding(
@@ -339,15 +314,30 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                                   color: Colors.white,
                                   fontSize: 16),
                             )),
-                        _myChip("isSelected24", "filter=Бензин", 'Бензин',
+                        _myChip(
+                            "isSelected24",
+                            "&attribute=pa_паливо&attribute_term=55",
+                            'Бензин',
                             widget.isSelected24),
-                        _myChip("isSelected25", "filter=Дизель", 'Дизель',
+                        _myChip(
+                            "isSelected25",
+                            "&attribute=pa_паливо&attribute_term=56",
+                            'Дизель',
                             widget.isSelected25),
-                        _myChip("isSelected26", "filter=Електро", 'Електро',
+                        _myChip(
+                            "isSelected26",
+                            "&attribute=pa_паливо&attribute_term=58",
+                            'Електро',
                             widget.isSelected26),
-                        _myChip("isSelected27", "filter=Газ", 'Газ',
+                        _myChip(
+                            "isSelected27",
+                            "&attribute=pa_паливо&attribute_term=59",
+                            'Газ',
                             widget.isSelected27),
-                        _myChip("isSelected28", "filter=Гибрид", 'Гибрид',
+                        _myChip(
+                            "isSelected28",
+                            "&attribute=pa_паливо&attribute_term=1803",
+                            'Гибрид',
                             widget.isSelected28),
                       ])),
                   Padding(
@@ -367,10 +357,16 @@ class _BottomSheetContent extends State<FavoriteWidget> {
                                   color: Colors.white,
                                   fontSize: 16),
                             )),
-                        _myChip("isSelected29", "filter=Розмитнена",
-                            'Розмитнена', widget.isSelected29),
-                        _myChip("isSelected30", "filter=Нерозмитнена",
-                            'Нерозмитнена', widget.isSelected30),
+                        _myChip(
+                            "isSelected29",
+                            "&attribute=pa_таможня&attribute_term=1787",
+                            'Розмитнена',
+                            widget.isSelected29),
+                        _myChip(
+                            "isSelected30",
+                            "&attribute=pa_таможня&attribute_term=68",
+                            'Нерозмитнена',
+                            widget.isSelected30),
                       ])),
                   SliderWidget(),
                 ]),
